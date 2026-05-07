@@ -71,7 +71,7 @@ export function FlightStatus({ flightStatus = SAMPLE }) {
       <div className="flex flex-col gap-1 text-sm">
         <div className="text-muted-foreground">{flightStatus.flightNumber}</div>
         <div className="text-lg font-medium">
-          {flightStatus.departure.cityName} to {flightStatus.arrival.cityName}
+          {flightStatus.departure.cityName} para {flightStatus.arrival.cityName}
         </div>
       </div>
 
@@ -85,11 +85,11 @@ export function FlightStatus({ flightStatus = SAMPLE }) {
             new Date(flightStatus.arrival.timestamp),
             new Date(flightStatus.departure.timestamp),
           )}{" "}
-          hours
+          horas
         </div>
         <div>·</div>
         <div className="text-xs text-muted-foreground">
-          {flightStatus.totalDistanceInMiles} mi
+          {flightStatus.totalDistanceInMiles} milhas
         </div>
         <div className="h-px grow bg-muted-foreground/20 ml-2" />
       </div>

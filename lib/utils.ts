@@ -24,7 +24,7 @@ export const fetcher = async (url: string) => {
 
   if (!res.ok) {
     const error = new Error(
-      "An error occurred while fetching the data.",
+      "Ocorreu um erro ao obter os dados.",
     ) as ApplicationError;
 
     error.info = await res.json();
@@ -131,7 +131,7 @@ export function getTitleFromChat(chat: Chat) {
   const firstMessage = messages[0];
 
   if (!firstMessage) {
-    return "Untitled";
+    return "Sem título";
   }
 
   return firstMessage.content;

@@ -21,13 +21,13 @@ import { Textarea } from "../ui/textarea";
 
 const suggestedActions = [
   {
-    title: "Help me book a flight",
-    label: "from San Francisco to London",
+    title: "Ajuda-me a reservar um voo",
+    label: "de San Francisco para Londres",
     action: "Help me book a flight from San Francisco to London",
   },
   {
-    title: "What is the status",
-    label: "of flight BA142 flying tmrw?",
+    title: "Qual é o estado",
+    label: "do voo BA142 que voa amanhã?",
     action: "What is the status of flight BA142 flying tmrw?",
   },
 ];
@@ -121,7 +121,7 @@ export function MultimodalInput({
         toast.error(error);
       }
     } catch (error) {
-      toast.error("Failed to upload file, please try again!");
+      toast.error("Não foi possível enviar o ficheiro. Tenta novamente!");
     }
   };
 
@@ -216,7 +216,7 @@ export function MultimodalInput({
 
       <Textarea
         ref={textareaRef}
-        placeholder="Send a message..."
+        placeholder="Enviar uma mensagem..."
         value={input}
         onChange={handleInput}
         className="min-h-[24px] overflow-hidden resize-none rounded-lg text-base bg-muted border-none"
@@ -226,7 +226,7 @@ export function MultimodalInput({
             event.preventDefault();
 
             if (isLoading) {
-              toast.error("Please wait for the model to finish its response!");
+              toast.error("Espera que o modelo termine a resposta!");
             } else {
               submitForm();
             }

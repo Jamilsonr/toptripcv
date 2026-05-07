@@ -129,13 +129,13 @@ export function SelectSeats({
         <div className="flex flex-row items-center gap-2">
           <div className="size-4 bg-blue-500 rounded-sm" />
           <div className="text text-muted-foreground font-medium text-sm">
-            Available
+            Disponível
           </div>
         </div>
         <div className="flex flex-row items-center gap-2">
           <div className="size-4 bg-gray-500 rounded-sm" />
           <div className="text text-muted-foreground font-medium text-sm">
-            Unavailable
+            Indisponível
           </div>
         </div>
       </div>

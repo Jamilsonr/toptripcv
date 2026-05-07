@@ -8,8 +8,8 @@ export function VerifyPayment({
   return (
     <div>
       {hasCompletedPayment
-        ? "Your payment transaction has been verified!"
-        : "Unable to verify your payment, please try again!"}
+        ? "O pagamento foi verificado!"
+        : "Não foi possível verificar o pagamento. Tenta novamente!"}
     </div>
   );
 }

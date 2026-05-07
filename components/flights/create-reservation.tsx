@@ -28,10 +28,10 @@ export function CreateReservation({ reservation = SAMPLE }) {
         <div className="flex flex-col justify-between gap-4">
           <div className="text font-medium">
             <span className="no-skeleton text-foreground/50">
-              Continue purchasing this reservation from{" "}
+              Continuar a compra desta reserva de{" "}
             </span>
-            {reservation.departure.cityName} to {reservation.arrival.cityName}
-            <span className="no-skeleton text-foreground/50"> at </span>{" "}
+            {reservation.departure.cityName} para {reservation.arrival.cityName}
+            <span className="no-skeleton text-foreground/50"> por </span>{" "}
             <span className="no-skeleton text-emerald-600 font-medium">
               ${reservation.totalPriceInUSD} USD
               <span className="no-skeleton text-foreground/50 ">?</span>
@@ -40,7 +40,9 @@ export function CreateReservation({ reservation = SAMPLE }) {
 
           <div className="flex flex-row gap-6">
             <div className="flex flex-col gap-1">
-              <div className="text font-medium sm:text-base text-sm">Seats</div>
+              <div className="text font-medium sm:text-base text-sm">
+                Lugares
+              </div>
               <div className="text-muted-foreground sm:text-base text-sm">
                 {reservation.seats.join(", ")}
               </div>
@@ -48,7 +50,7 @@ export function CreateReservation({ reservation = SAMPLE }) {
 
             <div className="flex flex-col gap-1">
               <div className="text sm:text-base text-sm font-medium">
-                Flight Number
+                Número do voo
               </div>
               <div className="text sm:text-base text-sm text-muted-foreground">
                 {reservation.flightNumber}
@@ -56,7 +58,7 @@ export function CreateReservation({ reservation = SAMPLE }) {
             </div>
 
             <div className="flex flex-col gap-1">
-              <div className="text font-medium sm:text-base text-sm">Date</div>
+              <div className="text font-medium sm:text-base text-sm">Data</div>
               <div className="text text-muted-foreground sm:text-base text-sm">
                 {format(new Date(reservation.arrival.timestamp), "dd LLL yyyy")}
               </div>
