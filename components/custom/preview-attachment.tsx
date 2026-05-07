@@ -1,4 +1,7 @@
+"use client";
+
 import { Attachment } from "ai";
+import { useTranslations } from "next-intl";
 
 import { LoaderIcon } from "./icons";
 
@@ -10,6 +13,7 @@ export const PreviewAttachment = ({
   isUploading?: boolean;
 }) => {
   const { name, url, contentType } = attachment;
+  const t = useTranslations("Attachments");
 
   return (
     <div className="flex flex-col gap-2 max-w-16">
@@ -21,7 +25,7 @@ export const PreviewAttachment = ({
             <img
               key={url}
               src={url}
-              alt={name ?? "An image attachment"}
+              alt={name ?? t("imageAltFallback")}
               className="rounded-md size-full object-cover"
             />
           ) : (

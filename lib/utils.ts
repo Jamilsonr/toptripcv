@@ -126,12 +126,12 @@ export function convertToUIMessages(
   }, []);
 }
 
-export function getTitleFromChat(chat: Chat) {
+export function getTitleFromChat(chat: Chat, fallbackTitle = "Untitled") {
   const messages = convertToUIMessages(chat.messages as Array<CoreMessage>);
   const firstMessage = messages[0];
 
   if (!firstMessage) {
-    return "Untitled";
+    return fallbackTitle;
   }
 
   return firstMessage.content;

@@ -2,6 +2,7 @@
 
 import { useChat } from "ai/react";
 import { differenceInHours, format } from "date-fns";
+import { useTranslations } from "next-intl";
 
 const SAMPLE = {
   flights: [
@@ -80,6 +81,7 @@ export function ListFlights({
   chatId: string;
   results?: typeof SAMPLE;
 }) {
+  const t = useTranslations("Flights");
   const { append } = useChat({
     id: chatId,
     body: { id: chatId },
@@ -113,7 +115,7 @@ export function ListFlights({
               <div>{flight.airlines.join(", ")}</div>
             </div>
             <div className="text sm:hidden text-xs sm:text-sm text-muted-foreground flex flex-row gap-2">
-              {flight.airlines.length} stops
+              {flight.airlines.length} {t("stops")}
             </div>
           </div>
 
@@ -124,7 +126,7 @@ export function ListFlights({
                   new Date(flight.arrival.timestamp),
                   new Date(flight.departure.timestamp),
                 )}{" "}
-                hr
+                {t("hoursShort")}
               </div>
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground flex flex-row">
@@ -141,7 +143,7 @@ export function ListFlights({
               </div>
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground flex flex-row">
-              Round Trip
+              {t("roundTrip")}
             </div>
           </div>
         </div>

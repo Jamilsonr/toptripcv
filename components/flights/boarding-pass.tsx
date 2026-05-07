@@ -1,5 +1,8 @@
+"use client";
+
 import { format } from "date-fns";
 import { FlashlightIcon, PlaneTakeoffIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const SAMPLE = {
   reservationId: "RES123456",
@@ -25,6 +28,8 @@ const SAMPLE = {
 };
 
 export function DisplayBoardingPass({ boardingPass = SAMPLE }) {
+  const t = useTranslations("Flights");
+
   return (
     <div className="bg-yellow-200 p-4 rounded-lg flex flex-col gap-2">
       <div className="flex flex-row justify-between items-center relative">
@@ -58,7 +63,7 @@ export function DisplayBoardingPass({ boardingPass = SAMPLE }) {
       <div className="flex flex-row justify-between">
         <div className="flex flex-col gap-0.5">
           <div className="text-yellow-900 text-sm font-medium sm:text-base">
-            Passenger
+            {t("passenger")}
           </div>
           <div className="text-lg text-yellow-700">
             {boardingPass.passengerName}
@@ -67,7 +72,7 @@ export function DisplayBoardingPass({ boardingPass = SAMPLE }) {
 
         <div className="flex flex-col gap-0.5">
           <div className="text-yellow-900 text-sm font-medium sm:text-base">
-            Gate
+            {t("gate")}
           </div>
           <div className="text-lg text-yellow-700">
             {boardingPass.departure.gate}
@@ -76,7 +81,7 @@ export function DisplayBoardingPass({ boardingPass = SAMPLE }) {
 
         <div className="flex flex-col gap-0.5">
           <div className="text-yellow-900 text-sm font-medium sm:text-base">
-            Boards
+            {t("boards")}
           </div>
           <div className="text-lg text-yellow-700">
             {format(new Date(boardingPass.departure.timestamp), "h:mma")}

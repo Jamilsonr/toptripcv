@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export function VerifyPayment({
   result: { hasCompletedPayment },
 }: {
@@ -5,11 +9,13 @@ export function VerifyPayment({
     hasCompletedPayment: boolean;
   };
 }) {
+  const t = useTranslations("Payments");
+
   return (
     <div>
       {hasCompletedPayment
-        ? "Your payment transaction has been verified!"
-        : "Unable to verify your payment, please try again!"}
+        ? t("verifySuccess")
+        : t("verifyFail")}
     </div>
   );
 }

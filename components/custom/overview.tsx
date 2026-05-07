@@ -1,9 +1,14 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { LogoGoogle, MessageIcon, VercelIcon } from "./icons";
 
 export const Overview = () => {
+  const t = useTranslations("Overview");
+
   return (
     <motion.div
       key="overview"
@@ -20,28 +25,31 @@ export const Overview = () => {
           <MessageIcon />
         </p>
         <p>
-          This is an open source Chatbot template powered by the Google Gemini
-          model built with Next.js and the AI SDK by Vercel. It uses the{" "}
-          <code className="rounded-sm bg-muted-foreground/15 px-1.5 py-0.5">
-            streamText
-          </code>{" "}
-          function in the server and the{" "}
-          <code className="rounded-sm bg-muted-foreground/15 px-1.5 py-0.5">
-            useChat
-          </code>{" "}
-          hook on the client to create a seamless chat experience.
+          {t.rich("text", {
+            streamText: () => (
+              <code className="rounded-sm bg-muted-foreground/15 px-1.5 py-0.5">
+                streamText
+              </code>
+            ),
+            useChat: () => (
+              <code className="rounded-sm bg-muted-foreground/15 px-1.5 py-0.5">
+                useChat
+              </code>
+            ),
+          })}
         </p>
         <p>
-          {" "}
-          You can learn more about the AI SDK by visiting the{" "}
-          <Link
-            className="text-blue-500 dark:text-blue-400"
-            href="https://sdk.vercel.ai/docs"
-            target="_blank"
-          >
-            Docs
-          </Link>
-          .
+          {t.rich("learnMore", {
+            docs: () => (
+              <Link
+                className="text-blue-500 dark:text-blue-400"
+                href="https://sdk.vercel.ai/docs"
+                target="_blank"
+              >
+                {t("docs")}
+              </Link>
+            ),
+          })}
         </p>
       </div>
     </motion.div>

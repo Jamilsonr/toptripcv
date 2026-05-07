@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 import { auth, signOut } from "@/app/(auth)/auth";
 
 import { History } from "./history";
 import { SlashIcon } from "./icons";
+import { LocaleSwitcher } from "./locale-switcher";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
 import {
@@ -16,6 +18,7 @@ import {
 
 export const Navbar = async () => {
   let session = await auth();
+  const t = await getTranslations("Navbar");
 
   return (
     <>
@@ -27,13 +30,13 @@ export const Navbar = async () => {
               src="/images/gemini-logo.png"
               height={20}
               width={20}
-              alt="gemini logo"
+              alt={t("logoAlt")}
             />
             <div className="text-zinc-500">
               <SlashIcon size={16} />
             </div>
             <div className="text-sm dark:text-zinc-300 truncate w-28 md:w-fit">
-              Next.js Gemini Chatbot
+              {t("appName")}
             </div>
           </div>
         </div>
@@ -52,6 +55,9 @@ export const Navbar = async () => {
               <DropdownMenuItem>
                 <ThemeToggle />
               </DropdownMenuItem>
+              <DropdownMenuItem>
+                <LocaleSwitcher />
+              </DropdownMenuItem>
               <DropdownMenuItem className="p-1 z-50">
                 <form
                   className="w-full"
@@ -67,16 +73,24 @@ export const Navbar = async () => {
                     type="submit"
                     className="w-full text-left px-1 py-0.5 text-red-500"
                   >
-                    Sign out
+                    {t("logout")}
                   </button>
                 </form>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Button className="py-1.5 px-2 h-fit font-normal text-white" asChild>
-            <Link href="/login">Login</Link>
-          </Button>
+          <div className="flex flex-row gap-2 items-center">
+            <div className="hidden sm:flex w-40">
+              <LocaleSwitcher />
+            </div>
+            <Button
+              className="py-1.5 px-2 h-fit font-normal text-white"
+              asChild
+            >
+              <Link href="/login">{t("login")}</Link>
+            </Button>
+          </div>
         )}
       </div>
     </>

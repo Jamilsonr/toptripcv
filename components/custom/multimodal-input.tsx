@@ -2,6 +2,7 @@
 
 import { Attachment, ChatRequestOptions, CreateMessage, Message } from "ai";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import React, {
   useRef,
   useEffect,
@@ -21,13 +22,13 @@ import { Textarea } from "../ui/textarea";
 
 const suggestedActions = [
   {
-    title: "Help me book a flight",
-    label: "from San Francisco to London",
+    titleKey: "suggest1Title",
+    labelKey: "suggest1Label",
     action: "Help me book a flight from San Francisco to London",
   },
   {
-    title: "What is the status",
-    label: "of flight BA142 flying tmrw?",
+    titleKey: "suggest2Title",
+    labelKey: "suggest2Label",
     action: "What is the status of flight BA142 flying tmrw?",
   },
 ];
@@ -63,6 +64,7 @@ export function MultimodalInput({
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { width } = useWindowSize();
+  const t = useTranslations("Chat");
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -97,7 +99,8 @@ export function MultimodalInput({
     }
   }, [attachments, handleSubmit, setAttachments, width]);
 
-  const uploadFile = async (file: File) => {
+  const uploadFile = useCallback(
+    async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
 
@@ -121,9 +124,11 @@ export function MultimodalInput({
         toast.error(error);
       }
     } catch (error) {
-      toast.error("Failed to upload file, please try again!");
+      toast.error(t("uploadFailed"));
     }
-  };
+    },
+    [t],
+  );
 
   const handleFileChange = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
@@ -148,7 +153,7 @@ export function MultimodalInput({
         setUploadQueue([]);
       }
     },
-    [setAttachments],
+    [setAttachments, uploadFile],
   );
 
   return (
@@ -175,9 +180,11 @@ export function MultimodalInput({
                   }}
                   className="border-none bg-muted/50 w-full text-left border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 rounded-lg p-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex flex-col"
                 >
-                  <span className="font-medium">{suggestedAction.title}</span>
+                  <span className="font-medium">
+                    {t(suggestedAction.titleKey)}
+                  </span>
                   <span className="text-zinc-500 dark:text-zinc-400">
-                    {suggestedAction.label}
+                    {t(suggestedAction.labelKey)}
                   </span>
                 </button>
               </motion.div>
@@ -216,7 +223,7 @@ export function MultimodalInput({
 
       <Textarea
         ref={textareaRef}
-        placeholder="Send a message..."
+        placeholder={t("placeholder")}
         value={input}
         onChange={handleInput}
         className="min-h-[24px] overflow-hidden resize-none rounded-lg text-base bg-muted border-none"
@@ -226,7 +233,7 @@ export function MultimodalInput({
             event.preventDefault();
 
             if (isLoading) {
-              toast.error("Please wait for the model to finish its response!");
+              toast.error(t("waitModel"));
             } else {
               submitForm();
             }

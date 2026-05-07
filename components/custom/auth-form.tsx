@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
@@ -10,6 +14,8 @@ export function AuthForm({
   children: React.ReactNode;
   defaultEmail?: string;
 }) {
+  const t = useTranslations("Form");
+
   return (
     <form action={action} className="flex flex-col gap-4 px-4 sm:px-16">
       <div className="flex flex-col gap-2">
@@ -17,7 +23,7 @@ export function AuthForm({
           htmlFor="email"
           className="text-zinc-600 font-normal dark:text-zinc-400"
         >
-          Email Address
+          {t("email")}
         </Label>
 
         <Input
@@ -35,7 +41,7 @@ export function AuthForm({
           htmlFor="password"
           className="text-zinc-600 font-normal dark:text-zinc-400"
         >
-          Password
+          {t("password")}
         </Label>
 
         <Input

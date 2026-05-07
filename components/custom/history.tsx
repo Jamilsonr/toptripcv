@@ -5,6 +5,7 @@ import cx from "classnames";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { User } from "next-auth";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import useSWR from "swr";
@@ -47,6 +48,8 @@ import {
 export const History = ({ user }: { user: User | undefined }) => {
   const { id } = useParams();
   const pathname = usePathname();
+  const t = useTranslations("History");
+  const tCommon = useTranslations("Common");
 
   const [isHistoryVisible, setIsHistoryVisible] = useState(false);
   const {
@@ -70,16 +73,16 @@ export const History = ({ user }: { user: User | undefined }) => {
     });
 
     toast.promise(deletePromise, {
-      loading: "Deleting chat...",
+      loading: t("deleting"),
       success: () => {
         mutate((history) => {
           if (history) {
             return history.filter((h) => h.id !== id);
           }
         });
-        return "Chat deleted successfully";
+        return t("deleted");
       },
-      error: "Failed to delete chat",
+      error: t("deleteFailed"),
     });
 
     setShowDeleteDialog(false);
@@ -106,19 +109,23 @@ export const History = ({ user }: { user: User | undefined }) => {
         <SheetContent side="left" className="p-3 w-80 bg-muted">
           <SheetHeader>
             <VisuallyHidden.Root>
-              <SheetTitle className="text-left">History</SheetTitle>
+              <SheetTitle className="text-left">{t("title")}</SheetTitle>
               <SheetDescription className="text-left">
-                {history === undefined ? "loading" : history.length} chats
+                {history === undefined
+                  ? t("loading")
+                  : t("chatsCount", { count: history.length })}
               </SheetDescription>
             </VisuallyHidden.Root>
           </SheetHeader>
 
           <div className="text-sm flex flex-row items-center justify-between">
             <div className="flex flex-row gap-2">
-              <div className="dark:text-zinc-300">History</div>
+              <div className="dark:text-zinc-300">{t("title")}</div>
 
               <div className="dark:text-zinc-400 text-zinc-500">
-                {history === undefined ? "loading" : history.length} chats
+                {history === undefined
+                  ? t("loading")
+                  : t("chatsCount", { count: history.length })}
               </div>
             </div>
           </div>
@@ -130,7 +137,7 @@ export const History = ({ user }: { user: User | undefined }) => {
                 asChild
               >
                 <Link href="/">
-                  <div>Start a new chat</div>
+                  <div>{t("startNew")}</div>
                   <PencilEditIcon size={14} />
                 </Link>
               </Button>
@@ -140,14 +147,14 @@ export const History = ({ user }: { user: User | undefined }) => {
               {!user ? (
                 <div className="text-zinc-500 h-dvh w-full flex flex-row justify-center items-center text-sm gap-2">
                   <InfoIcon />
-                  <div>Login to save and revisit previous chats!</div>
+                  <div>{t("loginToSave")}</div>
                 </div>
               ) : null}
 
               {!isLoading && history?.length === 0 && user ? (
                 <div className="text-zinc-500 h-dvh w-full flex flex-row justify-center items-center text-sm gap-2">
                   <InfoIcon />
-                  <div>No chats found</div>
+                  <div>{t("noneFound")}</div>
                 </div>
               ) : null}
 
@@ -183,7 +190,7 @@ export const History = ({ user }: { user: User | undefined }) => {
                         href={`/chat/${chat.id}`}
                         className="text-ellipsis overflow-hidden text-left py-2 pl-2 rounded-lg outline-zinc-900"
                       >
-                        {getTitleFromChat(chat)}
+                        {getTitleFromChat(chat, tCommon("untitled"))}
                       </Link>
                     </Button>
 
@@ -207,7 +214,7 @@ export const History = ({ user }: { user: User | undefined }) => {
                             }}
                           >
                             <TrashIcon />
-                            <div>Delete</div>
+                            <div>{t("delete")}</div>
                           </Button>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -222,16 +229,15 @@ export const History = ({ user }: { user: User | undefined }) => {
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t("confirmTitle")}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              chat and remove it from our servers.
+              {t("confirmDescription")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete}>
-              Continue
+              {t("continue")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

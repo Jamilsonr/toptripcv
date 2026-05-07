@@ -1,0 +1,110 @@
+{
+  "App": {
+    "title": "Top Trip",
+    "description": "Chatbot em Next.js usando o AI SDK e o Gemini."
+  },
+  "Navbar": {
+    "appName": "Top Trip",
+    "logoAlt": "Logótipo do Gemini",
+    "login": "Iniciar sessão",
+    "logout": "Sair"
+  },
+  "Locale": {
+    "pt": "Português",
+    "en": "English",
+    "switch": "Idioma"
+  },
+  "Auth": {
+    "signInTitle": "Iniciar sessão",
+    "signInDescription": "Usa o teu email e palavra-passe para iniciar sessão",
+    "signInButton": "Entrar",
+    "invalidCredentials": "Credenciais inválidas!",
+    "invalidSubmission": "Não foi possível validar os dados do formulário!",
+    "noAccount": "Ainda não tens conta?",
+    "signUpLink": "Registar",
+    "forFree": "grátis.",
+    "signUpTitle": "Criar conta",
+    "signUpDescription": "Cria uma conta com o teu email e palavra-passe",
+    "signUpButton": "Registar",
+    "accountExists": "A conta já existe",
+    "createAccountFailed": "Não foi possível criar a conta",
+    "accountCreated": "Conta criada com sucesso",
+    "alreadyHaveAccount": "Já tens conta?",
+    "signInLink": "Iniciar sessão"
+  },
+  "Form": {
+    "email": "Endereço de email",
+    "password": "Palavra-passe",
+    "loading": "A carregar",
+    "submitForm": "Submeter formulário"
+  },
+  "History": {
+    "title": "Histórico",
+    "loading": "a carregar",
+    "chatsCount": "{count} conversas",
+    "startNew": "Iniciar nova conversa",
+    "loginToSave": "Inicia sessão para guardar e rever conversas anteriores!",
+    "noneFound": "Nenhuma conversa encontrada",
+    "delete": "Eliminar",
+    "deleting": "A eliminar conversa...",
+    "deleted": "Conversa eliminada com sucesso",
+    "deleteFailed": "Não foi possível eliminar a conversa",
+    "confirmTitle": "Tens a certeza absoluta?",
+    "confirmDescription": "Esta ação não pode ser desfeita. A tua conversa será eliminada permanentemente e removida dos nossos servidores.",
+    "cancel": "Cancelar",
+    "continue": "Continuar"
+  },
+  "Chat": {
+    "uploadFailed": "Não foi possível enviar o ficheiro. Tenta novamente!",
+    "placeholder": "Enviar uma mensagem...",
+    "waitModel": "Espera que o modelo termine a resposta!",
+    "suggest1Title": "Ajuda-me a reservar um voo",
+    "suggest1Label": "de San Francisco para Londres",
+    "suggest2Title": "Qual é o estado",
+    "suggest2Label": "do voo BA142 que voa amanhã?"
+  },
+  "Overview": {
+    "text": "Este é um template open-source de chatbot alimentado pelo modelo Google Gemini, construído com Next.js e o AI SDK da Vercel. Usa a função {streamText} no servidor e o hook {useChat} no cliente para criar uma experiência de chat fluida.",
+    "learnMore": "Podes saber mais sobre o AI SDK ao visitar a {docs}.",
+    "docs": "Documentação"
+  },
+  "Theme": {
+    "toggle": "Mudar para modo {mode}",
+    "dark": "escuro",
+    "light": "claro"
+  },
+  "Attachments": {
+    "imageAltFallback": "Um anexo de imagem"
+  },
+  "Payments": {
+    "unknownError": "Ocorreu um erro desconhecido",
+    "verified": "Pagamento verificado",
+    "gatewayTimedOut": "Tempo limite do gateway de pagamento",
+    "useSavedInfo": "Usa a tua informação guardada para esta transação",
+    "enterMagicWord": "Introduz a palavra mágica para autorizar o pagamento. Dica: rima com bercel.",
+    "magicWordPlaceholder": "Introduz a palavra mágica...",
+    "verifySuccess": "O pagamento foi verificado!",
+    "verifyFail": "Não foi possível verificar o pagamento. Tenta novamente!"
+  },
+  "Flights": {
+    "seats": "Lugares",
+    "flightNumber": "Número do voo",
+    "date": "Data",
+    "passenger": "Passageiro",
+    "gate": "Porta",
+    "boards": "Embarque",
+    "stops": "escalas",
+    "hoursShort": "h",
+    "roundTrip": "Ida e volta",
+    "to": "para",
+    "hours": "horas",
+    "miles": "milhas",
+    "available": "Disponível",
+    "unavailable": "Indisponível",
+    "continuePurchasingFrom": "Continuar a compra desta reserva de",
+    "forPrice": "por"
+  },
+  "Common": {
+    "untitled": "Sem título"
+  }
+}

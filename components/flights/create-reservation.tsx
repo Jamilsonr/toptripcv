@@ -1,4 +1,7 @@
+"use client";
+
 import { format } from "date-fns";
+import { useTranslations } from "next-intl";
 
 const SAMPLE = {
   seats: ["4C"],
@@ -22,16 +25,22 @@ const SAMPLE = {
 };
 
 export function CreateReservation({ reservation = SAMPLE }) {
+  const t = useTranslations("Flights");
+
   return (
     <div className="rounded-lg bg-muted p-4">
       <div>
         <div className="flex flex-col justify-between gap-4">
           <div className="text font-medium">
             <span className="no-skeleton text-foreground/50">
-              Continue purchasing this reservation from{" "}
+              {t("continuePurchasingFrom")}{" "}
             </span>
-            {reservation.departure.cityName} to {reservation.arrival.cityName}
-            <span className="no-skeleton text-foreground/50"> at </span>{" "}
+            {reservation.departure.cityName} {t("to")}{" "}
+            {reservation.arrival.cityName}
+            <span className="no-skeleton text-foreground/50">
+              {" "}
+              {t("forPrice")}{" "}
+            </span>{" "}
             <span className="no-skeleton text-emerald-600 font-medium">
               ${reservation.totalPriceInUSD} USD
               <span className="no-skeleton text-foreground/50 ">?</span>
@@ -40,7 +49,9 @@ export function CreateReservation({ reservation = SAMPLE }) {
 
           <div className="flex flex-row gap-6">
             <div className="flex flex-col gap-1">
-              <div className="text font-medium sm:text-base text-sm">Seats</div>
+              <div className="text font-medium sm:text-base text-sm">
+                {t("seats")}
+              </div>
               <div className="text-muted-foreground sm:text-base text-sm">
                 {reservation.seats.join(", ")}
               </div>
@@ -48,7 +59,7 @@ export function CreateReservation({ reservation = SAMPLE }) {
 
             <div className="flex flex-col gap-1">
               <div className="text sm:text-base text-sm font-medium">
-                Flight Number
+                {t("flightNumber")}
               </div>
               <div className="text sm:text-base text-sm text-muted-foreground">
                 {reservation.flightNumber}
@@ -56,7 +67,9 @@ export function CreateReservation({ reservation = SAMPLE }) {
             </div>
 
             <div className="flex flex-col gap-1">
-              <div className="text font-medium sm:text-base text-sm">Date</div>
+              <div className="text font-medium sm:text-base text-sm">
+                {t("date")}
+              </div>
               <div className="text text-muted-foreground sm:text-base text-sm">
                 {format(new Date(reservation.arrival.timestamp), "dd LLL yyyy")}
               </div>

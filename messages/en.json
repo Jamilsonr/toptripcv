@@ -1,0 +1,110 @@
+{
+  "App": {
+    "title": "Top Trip",
+    "description": "Next.js chatbot template using the AI SDK and Gemini."
+  },
+  "Navbar": {
+    "appName": "Top Trip",
+    "logoAlt": "Gemini logo",
+    "login": "Login",
+    "logout": "Sign out"
+  },
+  "Locale": {
+    "pt": "Português",
+    "en": "English",
+    "switch": "Language"
+  },
+  "Auth": {
+    "signInTitle": "Sign In",
+    "signInDescription": "Use your email and password to sign in",
+    "signInButton": "Sign in",
+    "invalidCredentials": "Invalid credentials!",
+    "invalidSubmission": "Failed validating your submission!",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Sign up",
+    "forFree": "for free.",
+    "signUpTitle": "Sign Up",
+    "signUpDescription": "Create an account with your email and password",
+    "signUpButton": "Sign Up",
+    "accountExists": "Account already exists",
+    "createAccountFailed": "Failed to create account",
+    "accountCreated": "Account created successfully",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInLink": "Sign in"
+  },
+  "Form": {
+    "email": "Email Address",
+    "password": "Password",
+    "loading": "Loading",
+    "submitForm": "Submit form"
+  },
+  "History": {
+    "title": "History",
+    "loading": "loading",
+    "chatsCount": "{count} chats",
+    "startNew": "Start a new chat",
+    "loginToSave": "Login to save and revisit previous chats!",
+    "noneFound": "No chats found",
+    "delete": "Delete",
+    "deleting": "Deleting chat...",
+    "deleted": "Chat deleted successfully",
+    "deleteFailed": "Failed to delete chat",
+    "confirmTitle": "Are you absolutely sure?",
+    "confirmDescription": "This action cannot be undone. This will permanently delete your chat and remove it from our servers.",
+    "cancel": "Cancel",
+    "continue": "Continue"
+  },
+  "Chat": {
+    "uploadFailed": "Failed to upload file, please try again!",
+    "placeholder": "Send a message...",
+    "waitModel": "Please wait for the model to finish its response!",
+    "suggest1Title": "Help me book a flight",
+    "suggest1Label": "from San Francisco to London",
+    "suggest2Title": "What is the status",
+    "suggest2Label": "of flight BA142 flying tmrw?"
+  },
+  "Overview": {
+    "text": "This is an open source Chatbot template powered by the Google Gemini model built with Next.js and the AI SDK by Vercel. It uses the {streamText} function in the server and the {useChat} hook on the client to create a seamless chat experience.",
+    "learnMore": "You can learn more about the AI SDK by visiting the {docs}.",
+    "docs": "Docs"
+  },
+  "Theme": {
+    "toggle": "Toggle {mode} mode",
+    "dark": "dark",
+    "light": "light"
+  },
+  "Attachments": {
+    "imageAltFallback": "An image attachment"
+  },
+  "Payments": {
+    "unknownError": "An unknown error occurred",
+    "verified": "Payment Verified",
+    "gatewayTimedOut": "Payment Gateway Timed Out",
+    "useSavedInfo": "Use your saved information for this transaction",
+    "enterMagicWord": "Enter the magic word to authorize payment. Hint: It rhymes with bercel.",
+    "magicWordPlaceholder": "Enter magic word...",
+    "verifySuccess": "Your payment transaction has been verified!",
+    "verifyFail": "Unable to verify your payment, please try again!"
+  },
+  "Flights": {
+    "seats": "Seats",
+    "flightNumber": "Flight Number",
+    "date": "Date",
+    "passenger": "Passenger",
+    "gate": "Gate",
+    "boards": "Boards",
+    "stops": "stops",
+    "hoursShort": "hr",
+    "roundTrip": "Round Trip",
+    "to": "to",
+    "hours": "hours",
+    "miles": "mi",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "continuePurchasingFrom": "Continue purchasing this reservation from",
+    "forPrice": "at"
+  },
+  "Common": {
+    "untitled": "Untitled"
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useChat } from "ai/react";
 import cx from "classnames";
+import { useTranslations } from "next-intl";
 
 interface Seat {
   seatNumber: string;
@@ -61,6 +62,7 @@ export function SelectSeats({
   chatId: string;
   availability?: typeof SAMPLE;
 }) {
+  const t = useTranslations("Flights");
   const { append } = useChat({
     id: chatId,
     body: { id: chatId },
@@ -129,13 +131,13 @@ export function SelectSeats({
         <div className="flex flex-row items-center gap-2">
           <div className="size-4 bg-blue-500 rounded-sm" />
           <div className="text text-muted-foreground font-medium text-sm">
-            Available
+            {t("available")}
           </div>
         </div>
         <div className="flex flex-row items-center gap-2">
           <div className="size-4 bg-gray-500 rounded-sm" />
           <div className="text text-muted-foreground font-medium text-sm">
-            Unavailable
+            {t("unavailable")}
           </div>
         </div>
       </div>
