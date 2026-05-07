@@ -41,57 +41,50 @@ export const Navbar = async () => {
           </div>
         </div>
 
-        {session ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                className="py-1.5 px-2 h-fit font-normal"
-                variant="secondary"
-              >
-                {session.user?.email}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>
-                <ThemeToggle />
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <LocaleSwitcher />
-              </DropdownMenuItem>
-              <DropdownMenuItem className="p-1 z-50">
-                <form
-                  className="w-full"
-                  action={async () => {
-                    "use server";
+        <div className="flex flex-row gap-2 items-center">
+          <LocaleSwitcher />
 
-                    await signOut({
-                      redirectTo: "/",
-                    });
-                  }}
+          {session ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  className="py-1.5 px-2 h-fit font-normal"
+                  variant="secondary"
                 >
-                  <button
-                    type="submit"
-                    className="w-full text-left px-1 py-0.5 text-red-500"
+                  {session.user?.email}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  <ThemeToggle />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="p-1 z-50">
+                  <form
+                    className="w-full"
+                    action={async () => {
+                      "use server";
+
+                      await signOut({
+                        redirectTo: "/",
+                      });
+                    }}
                   >
-                    {t("logout")}
-                  </button>
-                </form>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <div className="flex flex-row gap-2 items-center">
-            <div className="hidden sm:flex w-40">
-              <LocaleSwitcher />
-            </div>
-            <Button
-              className="py-1.5 px-2 h-fit font-normal text-white"
-              asChild
-            >
+                    <button
+                      type="submit"
+                      className="w-full text-left px-1 py-0.5 text-red-500"
+                    >
+                      {t("logout")}
+                    </button>
+                  </form>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button className="py-1.5 px-2 h-fit font-normal text-white" asChild>
               <Link href="/login">{t("login")}</Link>
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );

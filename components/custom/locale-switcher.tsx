@@ -1,10 +1,17 @@
 "use client";
 
+import { Languages } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useCallback } from "react";
 
 import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 export function LocaleSwitcher() {
   const router = useRouter();
@@ -21,23 +28,31 @@ export function LocaleSwitcher() {
   );
 
   return (
-    <div className="w-full flex flex-row gap-1">
-      <Button
-        type="button"
-        variant={locale === "pt" ? "secondary" : "ghost"}
-        className="h-8 px-2 w-full justify-center"
-        onClick={() => setLocale("pt")}
-      >
-        {t("pt")}
-      </Button>
-      <Button
-        type="button"
-        variant={locale === "en" ? "secondary" : "ghost"}
-        className="h-8 px-2 w-full justify-center"
-        onClick={() => setLocale("en")}
-      >
-        {t("en")}
-      </Button>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          type="button"
+          variant="outline"
+          className="size-9 p-0"
+          aria-label={t("switch")}
+        >
+          <Languages size={16} />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem
+          onSelect={() => setLocale("pt")}
+          className={locale === "pt" ? "font-medium" : undefined}
+        >
+          {t("pt")}
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={() => setLocale("en")}
+          className={locale === "en" ? "font-medium" : undefined}
+        >
+          {t("en")}
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
