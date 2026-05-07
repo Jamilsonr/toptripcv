@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BaggageClaim } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
@@ -26,12 +26,9 @@ export const Navbar = async () => {
         <div className="flex flex-row gap-3 items-center">
           <History user={session?.user} />
           <div className="flex flex-row gap-2 items-center">
-            <Image
-              src="/images/gemini-logo.png"
-              height={20}
-              width={20}
-              alt={t("logoAlt")}
-            />
+            <div className="text-blue-600 dark:text-blue-500">
+              <BaggageClaim size={18} />
+            </div>
             <div className="text-zinc-500">
               <SlashIcon size={16} />
             </div>
