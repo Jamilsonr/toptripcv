@@ -41,7 +41,7 @@ export function CreateReservation({ reservation = SAMPLE }) {
               {" "}
               {t("forPrice")}{" "}
             </span>{" "}
-            <span className="no-skeleton text-emerald-600 font-medium">
+            <span className="no-skeleton text-blue-600 font-medium">
               ${reservation.totalPriceInUSD} USD
               <span className="no-skeleton text-foreground/50 ">?</span>
             </span>

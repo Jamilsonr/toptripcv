@@ -54,11 +54,11 @@ export function AuthorizePayment({
   };
 
   return reservation?.hasCompletedPayment ? (
-    <div className="bg-emerald-500 p-4 rounded-lg gap-4 flex flex-row justify-between items-center">
-      <div className="dark:text-emerald-950 text-emerald-50 font-medium">
+    <div className="bg-blue-600 p-4 rounded-lg gap-4 flex flex-row justify-between items-center">
+      <div className="text-blue-50 font-medium">
         {t("verified")}
       </div>
-      <div className="dark:text-emerald-950 text-emerald-50">
+      <div className="text-blue-50">
         <CheckCircle size={20} />
       </div>
     </div>

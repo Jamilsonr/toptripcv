@@ -1,6 +1,6 @@
 "use client";
 
-import { Languages } from "lucide-react";
+import { BaggageClaim } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useCallback } from "react";
@@ -36,7 +36,7 @@ export function LocaleSwitcher() {
           className="size-9 p-0"
           aria-label={t("switch")}
         >
-          <Languages size={16} />
+          <BaggageClaim size={16} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
