@@ -627,6 +627,29 @@ export const SlashIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+export const LuggageIcon = ({ size = 18 }: { size?: number }) => (
+  <svg
+    height={size}
+    width={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ color: "currentcolor" }}
+  >
+    <path d="M9 7V5a3 3 0 0 1 6 0v2" />
+    <rect x="6" y="7" width="12" height="14" rx="2.5" />
+    <circle cx="9" cy="22" r="1" />
+    <circle cx="15" cy="22" r="1" />
+    <path d="M9.5 12.5l4-1.5" />
+    <path d="M16 12.5h3l1 1-1 1h-3z" />
+    <path d="M17.5 14.5v2.25" />
+    <path d="M16 18l1.5-1.5L19 18l-1.5 1.5z" />
+  </svg>
+);
+
 export const ArrowUpRightIcon = ({ size = 16 }: { size?: number }) => {
   return (
     <svg

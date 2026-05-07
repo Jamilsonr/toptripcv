@@ -1,11 +1,10 @@
-import { BaggageClaim } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { auth, signOut } from "@/app/(auth)/auth";
 
 import { History } from "./history";
-import { SlashIcon } from "./icons";
+import { LuggageIcon, SlashIcon } from "./icons";
 import { LocaleSwitcher } from "./locale-switcher";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
@@ -27,7 +26,7 @@ export const Navbar = async () => {
           <History user={session?.user} />
           <div className="flex flex-row gap-2 items-center">
             <div className="text-blue-600 dark:text-blue-500">
-              <BaggageClaim size={18} />
+              <LuggageIcon size={18} />
             </div>
             <div className="text-zinc-500">
               <SlashIcon size={16} />
