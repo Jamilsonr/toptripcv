@@ -15,6 +15,7 @@ type Pace = "slow" | "normal" | "fast";
 type OnboardingValues = {
   travelStyle: TravelStyle | null;
   interests: Array<string>;
+  interestsOther: string;
   pace: Pace | null;
   likes: string;
   avoid: string;
@@ -39,6 +40,7 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
   const [values, setValues] = useState<OnboardingValues>({
     travelStyle: null,
     interests: [],
+    interestsOther: "",
     pace: null,
     likes: "",
     avoid: "",
@@ -46,7 +48,10 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
 
   const canNext = useMemo(() => {
     if (step === 0) return Boolean(values.travelStyle);
-    if (step === 1) return values.interests.length > 0;
+    if (step === 1)
+      return (
+        values.interests.length > 0 || values.interestsOther.trim().length > 0
+      );
     if (step === 2) return Boolean(values.pace);
     if (step === 3) return values.likes.trim().length >= 3;
     return false;
@@ -82,6 +87,15 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
   const submit = useCallback(async () => {
     if (!values.travelStyle || !values.pace) return;
 
+    const extraInterests = values.interestsOther
+      .split(",")
+      .map((x) => x.trim())
+      .filter(Boolean);
+
+    const interests = Array.from(
+      new Set([...values.interests, ...extraInterests]),
+    );
+
     setSubmitting(true);
     try {
       const response = await fetch("/api/onboarding", {
@@ -89,7 +103,7 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           travelStyle: values.travelStyle,
-          interests: values.interests,
+          interests,
           pace: values.pace,
           likes: values.likes.trim(),
           avoid: values.avoid.trim(),
@@ -186,8 +200,20 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
                       );
                     })}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    {t("qInterestsHint")}
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="interestsOther" className="text-sm">
+                      {t("qInterestsOther")}
+                    </Label>
+                    <Input
+                      id="interestsOther"
+                      value={values.interestsOther}
+                      onChange={(e) => setField("interestsOther", e.target.value)}
+                      placeholder={t("qInterestsOtherPlaceholder")}
+                      className="h-11 rounded-xl"
+                    />
+                    <div className="text-xs text-muted-foreground">
+                      {t("qInterestsHint")}
+                    </div>
                   </div>
                 </div>
               ) : step === 2 ? (

@@ -104,6 +104,8 @@
     "styleAdventure": "Adventure",
     "qInterests": "What can’t be missing?",
     "qInterestsHint": "Select one or more interests.",
+    "qInterestsOther": "Other (optional)",
+    "qInterestsOtherPlaceholder": "e.g. diving, hiking, photography… (comma-separated)",
     "interest": {
       "praia": "Beach",
       "cultura": "Culture",
