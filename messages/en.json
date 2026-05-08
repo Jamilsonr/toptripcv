@@ -56,12 +56,14 @@
   },
   "Chat": {
     "uploadFailed": "Failed to upload file, please try again!",
-    "placeholder": "Send a message...",
+    "placeholder": "Tell me the destination and dates…",
     "waitModel": "Please wait for the model to finish its response!",
-    "suggest1Title": "Book a flight",
-    "suggest1Label": "San Francisco → London",
-    "suggest2Title": "Check flight status",
-    "suggest2Label": "BA142 (tomorrow)"
+    "suggest1Title": "Create full itinerary",
+    "suggest1Label": "Praia (CV) · 5 days",
+    "suggest1Action": "Create a complete 5-day itinerary for Praia, Cabo Verde.",
+    "suggest2Title": "Itinerary + weather",
+    "suggest2Label": "Lisbon · this weekend",
+    "suggest2Action": "I want an itinerary for Lisbon this weekend and also the weather forecast."
   },
   "PreLogin": {
     "brand": "Top Trip",

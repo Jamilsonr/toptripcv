@@ -20,19 +20,6 @@ import useWindowSize from "./use-window-size";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 
-const suggestedActions = [
-  {
-    titleKey: "suggest1Title",
-    labelKey: "suggest1Label",
-    action: "Ajuda-me a reservar um voo de San Francisco para Londres",
-  },
-  {
-    titleKey: "suggest2Title",
-    labelKey: "suggest2Label",
-    action: "Qual é o estado do voo BA142 que voa amanhã?",
-  },
-];
-
 export function MultimodalInput({
   input,
   setInput,
@@ -65,6 +52,19 @@ export function MultimodalInput({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { width } = useWindowSize();
   const t = useTranslations("Chat");
+
+  const suggestedActions = [
+    {
+      title: t("suggest1Title"),
+      label: t("suggest1Label"),
+      action: t("suggest1Action"),
+    },
+    {
+      title: t("suggest2Title"),
+      label: t("suggest2Label"),
+      action: t("suggest2Action"),
+    },
+  ];
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -181,10 +181,10 @@ export function MultimodalInput({
                   className="border-none bg-muted/50 w-full text-left border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 rounded-lg p-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex flex-col"
                 >
                   <span className="font-medium">
-                    {t(suggestedAction.titleKey)}
+                    {suggestedAction.title}
                   </span>
                   <span className="text-zinc-500 dark:text-zinc-400">
-                    {t(suggestedAction.labelKey)}
+                    {suggestedAction.label}
                   </span>
                 </button>
               </motion.div>

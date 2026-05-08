@@ -56,12 +56,14 @@
   },
   "Chat": {
     "uploadFailed": "Não foi possível enviar o ficheiro. Tenta novamente!",
-    "placeholder": "Enviar uma mensagem...",
+    "placeholder": "Diz o destino e datas…",
     "waitModel": "Espera que o modelo termine a resposta!",
-    "suggest1Title": "Reservar um voo",
-    "suggest1Label": "San Francisco → Londres",
-    "suggest2Title": "Ver estado do voo",
-    "suggest2Label": "BA142 (amanhã)"
+    "suggest1Title": "Criar itinerário completo",
+    "suggest1Label": "Praia (CV) · 5 dias",
+    "suggest1Action": "Cria um itinerário completo de 5 dias em Praia, Cabo Verde.",
+    "suggest2Title": "Itinerário + clima",
+    "suggest2Label": "Lisboa · este fim‑de‑semana",
+    "suggest2Action": "Quero um itinerário para Lisboa este fim‑de‑semana e diz também o tempo previsto."
   },
   "PreLogin": {
     "brand": "Top Trip",
