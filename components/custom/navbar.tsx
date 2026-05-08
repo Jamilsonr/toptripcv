@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { auth, signOut } from "@/app/(auth)/auth";
@@ -6,6 +5,7 @@ import { auth, signOut } from "@/app/(auth)/auth";
 import { History } from "./history";
 import { LuggageIcon, SlashIcon } from "./icons";
 import { LocaleSwitcher } from "./locale-switcher";
+import { NavbarLoginCta } from "./navbar-login-cta";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
 import {
@@ -76,9 +76,7 @@ export const Navbar = async () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button className="py-1.5 px-2 h-fit font-normal text-white" asChild>
-              <Link href="/login">{t("login")}</Link>
-            </Button>
+            <NavbarLoginCta label={t("login")} />
           )}
         </div>
       </div>
