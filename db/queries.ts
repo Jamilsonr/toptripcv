@@ -5,7 +5,7 @@ import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-import { user, chat, User, reservation } from "./schema";
+import { user, chat, User, reservation, userPreference } from "./schema";
 
 // Optionally, if not using email/pass login, you can
 // use the Drizzle adapter for Auth.js / NextAuth
@@ -139,4 +139,41 @@ export async function updateReservation({
       hasCompletedPayment,
     })
     .where(eq(reservation.id, id));
+}
+
+export async function getUserPreferenceByUserId({ id }: { id: string }) {
+  const [selected] = await db
+    .select()
+    .from(userPreference)
+    .where(eq(userPreference.userId, id));
+
+  return selected;
+}
+
+export async function upsertUserPreference({
+  userId,
+  preferences,
+}: {
+  userId: string;
+  preferences: any;
+}) {
+  const now = new Date();
+  const existing = await getUserPreferenceByUserId({ id: userId });
+
+  if (existing) {
+    return await db
+      .update(userPreference)
+      .set({
+        updatedAt: now,
+        preferences: JSON.stringify(preferences),
+      })
+      .where(eq(userPreference.userId, userId));
+  }
+
+  return await db.insert(userPreference).values({
+    userId,
+    createdAt: now,
+    updatedAt: now,
+    preferences: JSON.stringify(preferences),
+  });
 }

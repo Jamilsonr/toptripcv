@@ -41,3 +41,15 @@ export const reservation = pgTable("Reservation", {
 });
 
 export type Reservation = InferSelectModel<typeof reservation>;
+
+export const userPreference = pgTable("UserPreference", {
+  userId: uuid("userId")
+    .primaryKey()
+    .notNull()
+    .references(() => user.id),
+  createdAt: timestamp("createdAt").notNull(),
+  updatedAt: timestamp("updatedAt").notNull(),
+  preferences: json("preferences").notNull(),
+});
+
+export type UserPreference = InferSelectModel<typeof userPreference>;

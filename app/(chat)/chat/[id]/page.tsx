@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 
 import { auth } from "@/app/(auth)/auth";
 import { Chat as PreviewChat } from "@/components/custom/chat";
-import { getChatById } from "@/db/queries";
+import { Onboarding } from "@/components/custom/onboarding";
+import { getChatById, getUserPreferenceByUserId } from "@/db/queries";
 import { Chat } from "@/db/schema";
 import { convertToUIMessages } from "@/lib/utils";
 
@@ -29,6 +30,12 @@ export default async function Page({ params }: { params: any }) {
 
   if (session.user.id !== chat.userId) {
     return notFound();
+  }
+
+  const pref = await getUserPreferenceByUserId({ id: session.user.id });
+
+  if (!pref) {
+    return <Onboarding redirectTo={`/chat/${chat.id}`} />;
   }
 
   return <PreviewChat id={chat.id} initialMessages={chat.messages} />;
