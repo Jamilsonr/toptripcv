@@ -63,20 +63,32 @@
     "suggest2Title": "Check flight status",
     "suggest2Label": "BA142 (tomorrow)"
   },
-  "Overview": {
+  "PreLogin": {
     "brand": "Top Trip",
     "tagline": "AI trip planning",
     "pill": "Plan your trip in one click",
     "heroTitle": "Plan your trip in one click.",
     "heroSubtitle": "Our AI does the work behind the scenes and delivers a complete itinerary — flights, timings and clear next steps, ready to follow.",
-    "ctaPrimary": "Create itinerary",
-    "ctaSecondary": "See how it works",
     "feature1Title": "Fast answers",
     "feature1Desc": "Tell us where and when. The AI builds the plan and suggests the best options.",
     "feature2Title": "Complete itinerary",
     "feature2Desc": "Everything organized: schedules, stops, seats and the next steps.",
     "feature3Title": "No friction",
-    "feature3Desc": "One conversation. One click. A trip planned end-to-end.",
+    "feature3Desc": "One conversation. One click. A trip planned end-to-end."
+  },
+  "Overview": {
+    "brand": "Top Trip",
+    "tagline": "AI travel assistant",
+    "heroTitle": "Plan and book flights in minutes.",
+    "heroSubtitle": "Search options, check flight status, pick seats and create reservations in a fast, polished chat experience.",
+    "ctaPrimary": "Get started",
+    "ctaSecondary": "View docs",
+    "feature1Title": "Fast answers",
+    "feature1Desc": "Prompts and actions to go from zero to a reservation with less friction.",
+    "feature2Title": "Guided flows",
+    "feature2Desc": "Seats, payment and confirmation in clear, step-by-step UI.",
+    "feature3Title": "All in one place",
+    "feature3Desc": "History, attachments and context so you can pick up where you left off.",
     "text": "This is an open source Chatbot template powered by the Google Gemini model built with Next.js and the AI SDK by Vercel. It uses the {streamText} function in the server and the {useChat} hook on the client to create a seamless chat experience.",
     "learnMore": "You can learn more about the AI SDK by visiting the {docs}.",
     "docs": "Docs"

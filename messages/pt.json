@@ -63,20 +63,32 @@
     "suggest2Title": "Ver estado do voo",
     "suggest2Label": "BA142 (amanhã)"
   },
-  "Overview": {
+  "PreLogin": {
     "brand": "Top Trip",
     "tagline": "Planeamento de viagens por IA",
     "pill": "Planeie sua viagem com um clique",
     "heroTitle": "Planeie sua viagem com um clique.",
     "heroSubtitle": "A nossa Inteligência Artificial faz todo o trabalho por detrás e entrega-te um itinerário completo — voos, horários e passos claros, pronto para seguir.",
-    "ctaPrimary": "Criar itinerário",
-    "ctaSecondary": "Ver como funciona",
     "feature1Title": "Respostas rápidas",
     "feature1Desc": "Diz o destino e datas. A IA monta o plano e sugere as melhores opções.",
     "feature2Title": "Itinerário completo",
     "feature2Desc": "Recebe tudo organizado: horários, escalas, lugares e próximos passos.",
     "feature3Title": "Sem complicações",
-    "feature3Desc": "Uma conversa. Um clique. Uma viagem planeada do início ao fim.",
+    "feature3Desc": "Uma conversa. Um clique. Uma viagem planeada do início ao fim."
+  },
+  "Overview": {
+    "brand": "Top Trip",
+    "tagline": "Assistente de viagens com IA",
+    "heroTitle": "Planeia e reserva voos em minutos.",
+    "heroSubtitle": "Pesquisa opções, acompanha o estado do voo, escolhe lugares e cria reservas numa experiência de chat rápida e bonita.",
+    "ctaPrimary": "Começar agora",
+    "ctaSecondary": "Ver documentação",
+    "feature1Title": "Respostas rápidas",
+    "feature1Desc": "Sugestões e ações para ir do zero à reserva sem fricção.",
+    "feature2Title": "Fluxos guiados",
+    "feature2Desc": "Seleção de lugares, pagamento e confirmação com passos claros.",
+    "feature3Title": "Tudo num só lugar",
+    "feature3Desc": "Histórico, anexos e contexto para retomar conversas quando quiseres.",
     "text": "Este é um template open-source de chatbot alimentado pelo modelo Google Gemini, construído com Next.js e o AI SDK da Vercel. Usa a função {streamText} no servidor e o hook {useChat} no cliente para criar uma experiência de chat fluida.",
     "learnMore": "Podes saber mais sobre o AI SDK ao visitar a {docs}.",
     "docs": "Documentação"

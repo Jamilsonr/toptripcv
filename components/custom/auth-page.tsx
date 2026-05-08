@@ -3,10 +3,24 @@ import { Plane, ShieldCheck, Sparkles } from "lucide-react";
 export function AuthPage({
   title,
   description,
+  marketing,
   children,
 }: {
   title: string;
   description: string;
+  marketing: {
+    brand: string;
+    tagline: string;
+    pill: string;
+    heroTitle: string;
+    heroSubtitle: string;
+    feature1Title: string;
+    feature1Desc: string;
+    feature2Title: string;
+    feature2Desc: string;
+    feature3Title: string;
+    feature3Desc: string;
+  };
   children: React.ReactNode;
 }) {
   return (
@@ -19,21 +33,23 @@ export function AuthPage({
             </div>
             <div className="flex flex-col">
               <div className="text-sm font-semibold text-foreground">
-                Top Trip
+                {marketing.brand}
               </div>
               <div className="text-sm text-muted-foreground">
-                Planeamento de viagens, mais rápido
+                {marketing.tagline}
               </div>
             </div>
           </div>
 
           <div className="flex flex-col gap-3">
+            <div className="w-fit rounded-full border bg-background/50 px-3 py-1 text-xs font-medium text-blue-700 dark:text-blue-400">
+              {marketing.pill}
+            </div>
             <div className="text-4xl font-semibold tracking-tight text-foreground">
-              Viaja com confiança.
+              {marketing.heroTitle}
             </div>
             <div className="text-base text-muted-foreground max-w-md">
-              Cria uma conta para guardar conversas, reservas e histórico, e
-              retomar tudo quando quiseres.
+              {marketing.heroSubtitle}
             </div>
           </div>
 
@@ -44,10 +60,10 @@ export function AuthPage({
               </div>
               <div className="flex flex-col gap-1">
                 <div className="text-sm font-medium text-foreground">
-                  Experiência premium
+                  {marketing.feature1Title}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Interface rápida, limpa e focada no que importa.
+                  {marketing.feature1Desc}
                 </div>
               </div>
             </div>
@@ -58,10 +74,24 @@ export function AuthPage({
               </div>
               <div className="flex flex-col gap-1">
                 <div className="text-sm font-medium text-foreground">
-                  Conta e histórico
+                  {marketing.feature2Title}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Mantém as tuas conversas e reservas num só lugar.
+                  {marketing.feature2Desc}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 rounded-2xl border bg-background/40 p-4">
+              <div className="text-blue-600">
+                <Plane size={18} />
+              </div>
+              <div className="flex flex-col gap-1">
+                <div className="text-sm font-medium text-foreground">
+                  {marketing.feature3Title}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {marketing.feature3Desc}
                 </div>
               </div>
             </div>
@@ -82,4 +112,3 @@ export function AuthPage({
     </div>
   );
 }
-
