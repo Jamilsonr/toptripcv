@@ -57,7 +57,13 @@ export const Message = ({
                 return (
                   <div key={toolCallId}>
                     {toolName === "getWeather" ? (
-                      <Weather weatherAtLocation={result} />
+                      Object.keys(result).includes("error") ? (
+                        <div className="text-sm text-muted-foreground">
+                          {result.error}
+                        </div>
+                      ) : (
+                        <Weather weatherAtLocation={result} />
+                      )
                     ) : toolName === "displayFlightStatus" ? (
                       <FlightStatus flightStatus={result} />
                     ) : toolName === "searchFlights" ? (

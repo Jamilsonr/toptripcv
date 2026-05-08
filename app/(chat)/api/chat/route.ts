@@ -40,6 +40,7 @@ export async function POST(request: Request) {
         - DO NOT output lists.
         - after every tool call, pretend you're showing the result to the user and keep your response limited to a phrase.
         - today's date is ${new Date().toLocaleDateString()}.
+        - if the user asks about weather, call getWeather with a city name (e.g. "San Francisco", "Lisbon, PT") and NEVER ask for latitude/longitude.
         - ask follow up questions to nudge user into the optimal flow
         - ask for any details you don't know, like name of passenger, etc.'
         - C and D are aisle seats, A and F are window seats, B and E are middle seats
@@ -56,12 +57,45 @@ export async function POST(request: Request) {
     messages: coreMessages,
     tools: {
       getWeather: {
-        description: "Get the current weather at a location",
+        description:
+          "Get the current weather for a city name (no latitude/longitude needed)",
         parameters: z.object({
-          latitude: z.number().describe("Latitude coordinate"),
-          longitude: z.number().describe("Longitude coordinate"),
+          location: z
+            .string()
+            .describe('City name, e.g. "San Francisco" or "Lisbon, PT"'),
         }),
-        execute: async ({ latitude, longitude }) => {
+        execute: async ({ location }) => {
+          const coordinateMatch = location
+            .trim()
+            .match(/^(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)$/);
+
+          let latitude: number | null = null;
+          let longitude: number | null = null;
+
+          if (coordinateMatch) {
+            latitude = Number(coordinateMatch[1]);
+            longitude = Number(coordinateMatch[2]);
+          } else {
+            const geocodeResponse = await fetch(
+              `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+                location,
+              )}&count=1&language=pt&format=json`,
+            );
+
+            const geocodeData = await geocodeResponse.json();
+            const first = geocodeData?.results?.[0];
+
+            if (!first) {
+              return {
+                error:
+                  "Não encontrei essa cidade. Diz o nome da cidade e o país (ex.: “Lisboa, PT”).",
+              };
+            }
+
+            latitude = first.latitude;
+            longitude = first.longitude;
+          }
+
           const response = await fetch(
             `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`,
           );
