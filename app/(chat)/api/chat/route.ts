@@ -13,6 +13,7 @@ import {
   createReservation,
   deleteChatById,
   getChatById,
+  getUserPreferenceByUserId,
   getReservationById,
   saveChat,
 } from "@/db/queries";
@@ -32,19 +33,44 @@ export async function POST(request: Request) {
     (message) => message.content.length > 0,
   );
 
+  const pref = session.user?.id
+    ? await getUserPreferenceByUserId({ id: session.user.id })
+    : null;
+
+  let profile: any = null;
+  if (pref?.preferences) {
+    try {
+      profile =
+        typeof pref.preferences === "string"
+          ? JSON.parse(pref.preferences)
+          : pref.preferences;
+    } catch {
+      profile = pref.preferences;
+    }
+  }
+
   const result = await streamText({
     model: geminiProModel,
     system: `\n
         - You are Top Trip, an AI travel assistant.
         - Always reply in Portuguese (pt-PT). Only switch language if the user clearly writes in another language.
         - Primary goal: help the user plan a complete trip itinerary (day-by-day) based on their destination, dates/duration and preferences.
-        - Never say you "can't create an itinerary". If you need details, ask 1–2 short questions and still provide a helpful first draft.
-        - Keep the flow simple: ask only the minimum information needed to proceed.
+        - Never say you "can't create an itinerary".
+        - User profile (saved preferences). Use these to personalize suggestions and tone:
+          ${profile ? JSON.stringify(profile) : "null"}
+        - Itinerary flow (keep it simple and consistent):
+          - Step 1: Confirm destination (city + country).
+          - Step 2: Confirm dates OR trip duration (e.g. “5 dias”) and approximate month if dates are unknown.
+          - Step 3: Ask who is traveling (solo/casal/família) and any must-see / avoid (1 short question).
+          - Step 4: Ask for confirmation: “Queres que eu gere o itinerário agora?”
+          - Step 5 (after confirmation): Deliver the full itinerary as the outcome of the conversation.
+        - Ask at most 1–2 questions per message. If the user already provided a detail, do not ask again.
         - If the user asks about weather, call getWeather with a city name (e.g. "Praia, Cabo Verde", "Lisboa, PT") and NEVER ask for latitude/longitude.
         - Use tools only when they improve the experience (weather, flight search/status, seats, payment). Do not force a flight-booking flow unless the user asks to book.
         - Output style:
           - Prefer short paragraphs and compact bullet points when listing an itinerary.
           - Avoid long walls of text.
+          - For itineraries use headings like: "Resumo", "Dia 1", "Dia 2", ..., "Dicas".
         - Today's date is ${new Date().toLocaleDateString()}.
       `,
     messages: coreMessages,
