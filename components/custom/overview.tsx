@@ -41,6 +41,9 @@ export const Overview = () => {
           </div>
 
           <div className="flex flex-col gap-3">
+            <div className="w-fit rounded-full border bg-background/50 px-3 py-1 text-xs font-medium text-blue-700 dark:text-blue-400">
+              {t("pill")}
+            </div>
             <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
               {t("heroTitle")}
             </h1>
