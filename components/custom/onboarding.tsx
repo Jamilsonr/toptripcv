@@ -10,15 +10,14 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
 type TravelStyle = "relax" | "balanced" | "adventure";
-type Budget = "low" | "mid" | "high";
 type Pace = "slow" | "normal" | "fast";
 
 type OnboardingValues = {
-  tripGoal: string;
   travelStyle: TravelStyle | null;
-  budget: Budget | null;
   interests: Array<string>;
   pace: Pace | null;
+  likes: string;
+  avoid: string;
 };
 
 const allInterests = [
@@ -38,19 +37,18 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [values, setValues] = useState<OnboardingValues>({
-    tripGoal: "",
     travelStyle: null,
-    budget: null,
     interests: [],
     pace: null,
+    likes: "",
+    avoid: "",
   });
 
   const canNext = useMemo(() => {
-    if (step === 0) return values.tripGoal.trim().length >= 3;
-    if (step === 1) return Boolean(values.travelStyle);
-    if (step === 2) return Boolean(values.budget);
-    if (step === 3) return values.interests.length > 0;
-    if (step === 4) return Boolean(values.pace);
+    if (step === 0) return Boolean(values.travelStyle);
+    if (step === 1) return values.interests.length > 0;
+    if (step === 2) return Boolean(values.pace);
+    if (step === 3) return values.likes.trim().length >= 3;
     return false;
   }, [step, values]);
 
@@ -74,7 +72,7 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
   }, []);
 
   const next = useCallback(() => {
-    setStep((s) => Math.min(s + 1, 4));
+    setStep((s) => Math.min(s + 1, 3));
   }, []);
 
   const back = useCallback(() => {
@@ -82,7 +80,7 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
   }, []);
 
   const submit = useCallback(async () => {
-    if (!values.travelStyle || !values.budget || !values.pace) return;
+    if (!values.travelStyle || !values.pace) return;
 
     setSubmitting(true);
     try {
@@ -90,11 +88,11 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          tripGoal: values.tripGoal.trim(),
           travelStyle: values.travelStyle,
-          budget: values.budget,
           interests: values.interests,
           pace: values.pace,
+          likes: values.likes.trim(),
+          avoid: values.avoid.trim(),
         }),
       });
 
@@ -130,27 +128,11 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
 
           <div className="mt-8">
             <div className="text-xs text-muted-foreground">
-              {t("stepLabel", { step: step + 1, total: 5 })}
+              {t("stepLabel", { step: step + 1, total: 4 })}
             </div>
 
             <div className="mt-4">
               {step === 0 ? (
-                <div className="flex flex-col gap-3">
-                  <Label htmlFor="tripGoal" className="text-sm">
-                    {t("qTripGoal")}
-                  </Label>
-                  <Input
-                    id="tripGoal"
-                    value={values.tripGoal}
-                    onChange={(e) => setField("tripGoal", e.target.value)}
-                    placeholder={t("qTripGoalPlaceholder")}
-                    className="h-11 rounded-xl"
-                  />
-                  <div className="text-xs text-muted-foreground">
-                    {t("qTripGoalHint")}
-                  </div>
-                </div>
-              ) : step === 1 ? (
                 <div className="flex flex-col gap-3">
                   <div className="text-sm font-medium text-foreground">
                     {t("qStyle")}
@@ -179,36 +161,7 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
                     ))}
                   </div>
                 </div>
-              ) : step === 2 ? (
-                <div className="flex flex-col gap-3">
-                  <div className="text-sm font-medium text-foreground">
-                    {t("qBudget")}
-                  </div>
-                  <div className="grid sm:grid-cols-3 gap-3">
-                    {(
-                      [
-                        ["low", t("budgetLow")],
-                        ["mid", t("budgetMid")],
-                        ["high", t("budgetHigh")],
-                      ] as Array<[Budget, string]>
-                    ).map(([value, label]) => (
-                      <button
-                        key={value}
-                        type="button"
-                        onClick={() => setField("budget", value)}
-                        className={[
-                          "rounded-2xl border p-4 text-left transition-colors",
-                          values.budget === value
-                            ? "border-blue-500 bg-blue-50/60 dark:bg-blue-950/20"
-                            : "bg-background/40 hover:bg-accent",
-                        ].join(" ")}
-                      >
-                        <div className="text-sm font-medium">{label}</div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ) : step === 3 ? (
+              ) : step === 1 ? (
                 <div className="flex flex-col gap-3">
                   <div className="text-sm font-medium text-foreground">
                     {t("qInterests")}
@@ -237,7 +190,7 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
                     {t("qInterestsHint")}
                   </div>
                 </div>
-              ) : (
+              ) : step === 2 ? (
                 <div className="flex flex-col gap-3">
                   <div className="text-sm font-medium text-foreground">
                     {t("qPace")}
@@ -266,6 +219,38 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
                     ))}
                   </div>
                 </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="likes" className="text-sm">
+                      {t("qLikes")}
+                    </Label>
+                    <Input
+                      id="likes"
+                      value={values.likes}
+                      onChange={(e) => setField("likes", e.target.value)}
+                      placeholder={t("qLikesPlaceholder")}
+                      className="h-11 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="avoid" className="text-sm">
+                      {t("qAvoid")}
+                    </Label>
+                    <Input
+                      id="avoid"
+                      value={values.avoid}
+                      onChange={(e) => setField("avoid", e.target.value)}
+                      placeholder={t("qAvoidPlaceholder")}
+                      className="h-11 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="text-xs text-muted-foreground">
+                    {t("qLikesHint")}
+                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -275,7 +260,7 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
               {t("back")}
             </Button>
 
-            {step < 4 ? (
+            {step < 3 ? (
               <Button type="button" className="text-white" onClick={next} disabled={!canNext || submitting}>
                 {t("next")}
               </Button>
@@ -290,4 +275,3 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
     </div>
   );
 }
-

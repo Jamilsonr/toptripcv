@@ -7,11 +7,11 @@ import {
 } from "@/db/queries";
 
 const preferencesSchema = z.object({
-  tripGoal: z.string().min(1),
   travelStyle: z.enum(["relax", "balanced", "adventure"]),
-  budget: z.enum(["low", "mid", "high"]),
   interests: z.array(z.string()).min(1),
   pace: z.enum(["slow", "normal", "fast"]),
+  likes: z.string().min(3),
+  avoid: z.string().optional().default(""),
 });
 
 export async function GET() {
@@ -46,4 +46,3 @@ export async function POST(request: Request) {
 
   return new Response(null, { status: 204 });
 }
-
