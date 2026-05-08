@@ -58,12 +58,24 @@
     "uploadFailed": "Failed to upload file, please try again!",
     "placeholder": "Send a message...",
     "waitModel": "Please wait for the model to finish its response!",
-    "suggest1Title": "Help me book a flight",
-    "suggest1Label": "from San Francisco to London",
-    "suggest2Title": "What is the status",
-    "suggest2Label": "of flight BA142 flying tmrw?"
+    "suggest1Title": "Book a flight",
+    "suggest1Label": "San Francisco → London",
+    "suggest2Title": "Check flight status",
+    "suggest2Label": "BA142 (tomorrow)"
   },
   "Overview": {
+    "brand": "Top Trip",
+    "tagline": "AI travel assistant",
+    "heroTitle": "Plan and book flights in minutes.",
+    "heroSubtitle": "Search options, check flight status, pick seats and create reservations in a fast, polished chat experience.",
+    "ctaPrimary": "Get started",
+    "ctaSecondary": "View docs",
+    "feature1Title": "Fast answers",
+    "feature1Desc": "Prompts and actions to go from zero to a reservation with less friction.",
+    "feature2Title": "Guided flows",
+    "feature2Desc": "Seats, payment and confirmation in clear, step-by-step UI.",
+    "feature3Title": "All in one place",
+    "feature3Desc": "History, attachments and context so you can pick up where you left off.",
     "text": "This is an open source Chatbot template powered by the Google Gemini model built with Next.js and the AI SDK by Vercel. It uses the {streamText} function in the server and the {useChat} hook on the client to create a seamless chat experience.",
     "learnMore": "You can learn more about the AI SDK by visiting the {docs}.",
     "docs": "Docs"

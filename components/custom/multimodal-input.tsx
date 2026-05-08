@@ -24,12 +24,12 @@ const suggestedActions = [
   {
     titleKey: "suggest1Title",
     labelKey: "suggest1Label",
-    action: "Help me book a flight from San Francisco to London",
+    action: "Ajuda-me a reservar um voo de San Francisco para Londres",
   },
   {
     titleKey: "suggest2Title",
     labelKey: "suggest2Label",
-    action: "What is the status of flight BA142 flying tmrw?",
+    action: "Qual é o estado do voo BA142 que voa amanhã?",
   },
 ];
 
@@ -222,6 +222,7 @@ export function MultimodalInput({
       )}
 
       <Textarea
+        id="chat-input"
         ref={textareaRef}
         placeholder={t("placeholder")}
         value={input}
