@@ -65,16 +65,16 @@
   },
   "PreLogin": {
     "brand": "Top Trip",
-    "tagline": "Planeamento de viagens por IA",
-    "pill": "Planeie sua viagem com um clique",
-    "heroTitle": "Planeie sua viagem com um clique.",
-    "heroSubtitle": "A nossa Inteligência Artificial faz todo o trabalho por detrás e entrega-te um itinerário completo — voos, horários e passos claros, pronto para seguir.",
+    "tagline": "IA de viagens",
+    "pill": "1 clique. Itinerário pronto.",
+    "heroTitle": "Planeie sua viagem em 1 clique.",
+    "heroSubtitle": "Tu dizes o destino. A IA entrega o itinerário completo.",
     "feature1Title": "Respostas rápidas",
-    "feature1Desc": "Diz o destino e datas. A IA monta o plano e sugere as melhores opções.",
+    "feature1Desc": "Destino + datas. Pronto.",
     "feature2Title": "Itinerário completo",
-    "feature2Desc": "Recebe tudo organizado: horários, escalas, lugares e próximos passos.",
+    "feature2Desc": "Voos, horários e passos.",
     "feature3Title": "Sem complicações",
-    "feature3Desc": "Uma conversa. Um clique. Uma viagem planeada do início ao fim."
+    "feature3Desc": "Sem pesquisa. Sem stress."
   },
   "Overview": {
     "brand": "Top Trip",

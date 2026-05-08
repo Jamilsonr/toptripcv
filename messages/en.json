@@ -65,16 +65,16 @@
   },
   "PreLogin": {
     "brand": "Top Trip",
-    "tagline": "AI trip planning",
-    "pill": "Plan your trip in one click",
-    "heroTitle": "Plan your trip in one click.",
-    "heroSubtitle": "Our AI does the work behind the scenes and delivers a complete itinerary — flights, timings and clear next steps, ready to follow.",
+    "tagline": "AI travel planning",
+    "pill": "1 click. Itinerary ready.",
+    "heroTitle": "Plan your trip in 1 click.",
+    "heroSubtitle": "You share the destination. AI delivers the full itinerary.",
     "feature1Title": "Fast answers",
-    "feature1Desc": "Tell us where and when. The AI builds the plan and suggests the best options.",
+    "feature1Desc": "Destination + dates. Done.",
     "feature2Title": "Complete itinerary",
-    "feature2Desc": "Everything organized: schedules, stops, seats and the next steps.",
+    "feature2Desc": "Flights, timing, next steps.",
     "feature3Title": "No friction",
-    "feature3Desc": "One conversation. One click. A trip planned end-to-end."
+    "feature3Desc": "No searching. No stress."
   },
   "Overview": {
     "brand": "Top Trip",
