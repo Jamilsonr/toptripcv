@@ -5,7 +5,6 @@ import { auth, signOut } from "@/app/(auth)/auth";
 import { History } from "./history";
 import { LuggageIcon, SlashIcon } from "./icons";
 import { LocaleSwitcher } from "./locale-switcher";
-import { NavbarLoginCta } from "./navbar-login-cta";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
 import {
@@ -76,7 +75,7 @@ export const Navbar = async () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <NavbarLoginCta label={t("login")} />
+            null
           )}
         </div>
       </div>
