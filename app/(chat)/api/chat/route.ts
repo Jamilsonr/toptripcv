@@ -49,12 +49,16 @@ export async function POST(request: Request) {
     }
   }
 
+  const isNewChat =
+    coreMessages.length === 1 && coreMessages[0]?.role === "user";
+
   const result = await streamText({
     model: geminiProModel,
+    toolChoice: isNewChat ? { type: "tool", toolName: "tripIntake" } : "auto",
     system: `\n
         - You are Top Trip, an AI travel assistant.
         - Always reply in Portuguese (pt-PT). Only switch language if the user clearly writes in another language.
-        - If this is the first assistant response in a new chat (only one user message so far), call tripIntake to show a form for Origem/Destino/Datas/Passageiros.
+        - If this is the first assistant response in a new chat, you MUST call tripIntake.
         - After calling tripIntake, do NOT assume any trip values. Wait for the user to submit the form or provide the details in text.
         - Generative UI rule (to avoid unnecessary messages):
           - When you call a tool, your textual reply must be ONLY one short sentence and you must NOT ask any follow-up questions in the same message.
