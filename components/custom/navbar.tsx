@@ -20,10 +20,11 @@ export const Navbar = async () => {
 
   if (!session) {
     return (
-      <div className="bg-background absolute top-0 left-0 w-dvw py-3 px-4 flex flex-row items-center z-30">
+      <div className="bg-background absolute top-0 left-0 w-dvw py-3 px-4 flex flex-row items-center justify-between z-30">
         <div className="text-xl md:text-2xl font-semibold tracking-tight text-foreground">
           TopTrip
         </div>
+        <LocaleSwitcher />
       </div>
     );
   }
