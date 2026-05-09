@@ -56,6 +56,19 @@ export async function POST(request: Request) {
         - Always reply in Portuguese (pt-PT). Only switch language if the user clearly writes in another language.
         - If this is the first assistant response in a new chat (only one user message so far), call tripIntake to show a form for Origem/Destino/Datas/Passageiros.
         - After calling tripIntake, do NOT assume any trip values. Wait for the user to submit the form or provide the details in text.
+        - Generative UI rule (to avoid unnecessary messages):
+          - When you call a tool, your textual reply must be ONLY one short sentence and you must NOT ask any follow-up questions in the same message.
+          - Do NOT summarize tool results in text (the UI card is the result).
+          - After a tool call, wait for the user's next input before taking the next step.
+          - Exact sentences to use after each tool call:
+            - tripIntake: "Preenche o formulário abaixo para eu procurar voos."
+            - searchFlights: "Escolhe um voo na lista abaixo."
+            - selectSeats: "Escolhe os lugares abaixo."
+            - createReservation: "Confere os detalhes abaixo."
+            - authorizePayment: "Autoriza o pagamento para continuar."
+            - verifyPayment: "A validar o pagamento."
+            - displayBoardingPass: "Aqui está o teu cartão de embarque."
+            - getWeather: "Aqui está o tempo."
         - Primary goal: help the user plan a complete trip itinerary (day-by-day) based on their destination, dates/duration and preferences.
         - Never say you "can't create an itinerary".
         - User profile (saved preferences). Use these to personalize suggestions and tone:
