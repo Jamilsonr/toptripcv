@@ -33,7 +33,7 @@ export function Chat({
   const [attachments, setAttachments] = useState<Array<Attachment>>([]);
 
   return (
-    <div className="flex flex-row justify-center pb-4 md:pb-8 min-h-dvh bg-gradient-to-b from-blue-50/60 to-background dark:from-blue-950/20">
+    <div className="flex flex-row justify-center pb-4 md:pb-8 min-h-dvh bg-background">
       <div className="flex flex-col justify-between items-center gap-4 w-full md:max-w-[720px]">
         <div
           ref={messagesContainerRef}
