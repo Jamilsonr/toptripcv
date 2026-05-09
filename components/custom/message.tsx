@@ -51,6 +51,10 @@ export const Message = ({
           <div className="flex flex-col gap-4">
             {toolInvocations.map((toolInvocation) => {
               const { toolName, toolCallId, state } = toolInvocation;
+              const normalizedToolName = toolName
+                .toLowerCase()
+                .replace(/[^a-z0-9]/g, "");
+              const isTripIntake = normalizedToolName === "tripintake";
 
               if (state === "result") {
                 const { result } = toolInvocation;
@@ -67,7 +71,7 @@ export const Message = ({
                       )
                     ) : toolName === "displayFlightStatus" ? (
                       <FlightStatus flightStatus={result} />
-                    ) : toolName === "tripIntake" ? (
+                    ) : isTripIntake ? (
                       <TripIntake chatId={chatId} initialValues={result} />
                     ) : toolName === "searchFlights" ? (
                       <ListFlights chatId={chatId} results={result} />
@@ -95,7 +99,7 @@ export const Message = ({
                       <Weather />
                     ) : toolName === "displayFlightStatus" ? (
                       <FlightStatus />
-                    ) : toolName === "tripIntake" ? (
+                    ) : isTripIntake ? (
                       <TripIntake chatId={chatId} />
                     ) : toolName === "searchFlights" ? (
                       <ListFlights chatId={chatId} />
