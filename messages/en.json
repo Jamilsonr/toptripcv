@@ -65,6 +65,18 @@
     "suggest2Label": "Lisbon · this weekend",
     "suggest2Action": "I want an itinerary for Lisbon this weekend and also the weather forecast."
   },
+  "TripIntake": {
+    "title": "Trip details",
+    "subtitle": "Fill this in so I can search flights accurately.",
+    "origin": "Origin",
+    "originPlaceholder": "e.g. Praia, CV or RAI",
+    "destination": "Destination",
+    "destinationPlaceholder": "e.g. Lisbon, PT or LIS",
+    "departure": "Departure date",
+    "return": "Return date",
+    "passengers": "People",
+    "submit": "Search flights"
+  },
   "PreLogin": {
     "brand": "Top Trip",
     "tagline": "AI travel planning",

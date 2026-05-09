@@ -65,6 +65,18 @@
     "suggest2Label": "Lisboa · este fim‑de‑semana",
     "suggest2Action": "Quero um itinerário para Lisboa este fim‑de‑semana e diz também o tempo previsto."
   },
+  "TripIntake": {
+    "title": "Detalhes da viagem",
+    "subtitle": "Preenche para eu procurar voos com precisão.",
+    "origin": "Origem",
+    "originPlaceholder": "Ex.: Praia, CV ou RAI",
+    "destination": "Destino",
+    "destinationPlaceholder": "Ex.: Lisboa, PT ou LIS",
+    "departure": "Data de ida",
+    "return": "Data de volta",
+    "passengers": "Pessoas",
+    "submit": "Procurar voos"
+  },
   "PreLogin": {
     "brand": "Top Trip",
     "tagline": "IA de viagens",

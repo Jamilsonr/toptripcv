@@ -43,13 +43,27 @@ export async function generateSampleFlightStatus({
 export async function generateSampleFlightSearchResults({
   origin,
   destination,
+  departureDate,
+  returnDate,
+  passengers,
 }: {
   origin: string;
   destination: string;
+  departureDate?: string;
+  returnDate?: string;
+  passengers?: number;
 }) {
+  const meta = [
+    departureDate ? `Departure: ${departureDate}` : null,
+    returnDate ? `Return: ${returnDate}` : null,
+    passengers ? `Passengers: ${passengers}` : null,
+  ]
+    .filter(Boolean)
+    .join(", ");
+
   const { object: flightSearchResults } = await generateObject({
     model: geminiFlashModel,
-    prompt: `Generate search results for flights from ${origin} to ${destination}, limit to 4 results`,
+    prompt: `Generate search results for flights from ${origin} to ${destination}${meta ? ` (${meta})` : ""}, limit to 4 results`,
     output: "array",
     schema: z.object({
       id: z

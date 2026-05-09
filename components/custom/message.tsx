@@ -7,6 +7,7 @@ import { Streamdown } from "streamdown";
 
 import { BotIcon, UserIcon } from "./icons";
 import { PreviewAttachment } from "./preview-attachment";
+import { TripIntake } from "./trip-intake";
 import { Weather } from "./weather";
 import { AuthorizePayment } from "../flights/authorize-payment";
 import { DisplayBoardingPass } from "../flights/boarding-pass";
@@ -66,6 +67,8 @@ export const Message = ({
                       )
                     ) : toolName === "displayFlightStatus" ? (
                       <FlightStatus flightStatus={result} />
+                    ) : toolName === "tripIntake" ? (
+                      <TripIntake chatId={chatId} initialValues={result} />
                     ) : toolName === "searchFlights" ? (
                       <ListFlights chatId={chatId} results={result} />
                     ) : toolName === "selectSeats" ? (
@@ -92,6 +95,8 @@ export const Message = ({
                       <Weather />
                     ) : toolName === "displayFlightStatus" ? (
                       <FlightStatus />
+                    ) : toolName === "tripIntake" ? (
+                      <TripIntake chatId={chatId} />
                     ) : toolName === "searchFlights" ? (
                       <ListFlights chatId={chatId} />
                     ) : toolName === "selectSeats" ? (

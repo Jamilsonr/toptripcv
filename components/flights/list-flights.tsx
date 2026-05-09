@@ -97,18 +97,18 @@ export function ListFlights({
           onClick={() => {
             append({
               role: "user",
-              content: `I would like to book the ${flight.airlines} one!`,
+              content: `Quero escolher o voo da ${flight.airlines.join(", ")}.`,
             });
           }}
         >
           <div className="flex flex-col w-full gap-0.5 justify-between">
             <div className="flex flex-row gap-0.5 text-base sm:text-base font-medium group-hover:underline">
               <div className="text">
-                {format(new Date(flight.departure.timestamp), "h:mm a")}
+                {format(new Date(flight.departure.timestamp), "HH:mm")}
               </div>
               <div className="no-skeleton">–</div>
               <div className="text">
-                {format(new Date(flight.arrival.timestamp), "h:mm a")}
+                {format(new Date(flight.arrival.timestamp), "HH:mm")}
               </div>
             </div>
             <div className="text w-fit hidden sm:flex text-sm text-muted-foreground flex-row gap-2">

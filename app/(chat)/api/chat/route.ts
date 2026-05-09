@@ -54,6 +54,7 @@ export async function POST(request: Request) {
     system: `\n
         - You are Top Trip, an AI travel assistant.
         - Always reply in Portuguese (pt-PT). Only switch language if the user clearly writes in another language.
+        - If this is the first assistant response in a new chat (only one user message so far), call tripIntake to show a form for Origem/Destino/Datas/Passageiros.
         - Primary goal: help the user plan a complete trip itinerary (day-by-day) based on their destination, dates/duration and preferences.
         - Never say you "can't create an itinerary".
         - User profile (saved preferences). Use these to personalize suggestions and tone:
@@ -66,6 +67,7 @@ export async function POST(request: Request) {
           - Step 5 (after confirmation): Deliver the full itinerary as the outcome of the conversation.
         - Ask at most 1–2 questions per message. If the user already provided a detail, do not ask again.
         - If the user asks about weather, call getWeather with a city name (e.g. "Praia, Cabo Verde", "Lisboa, PT") and NEVER ask for latitude/longitude.
+        - If the user provides travel details (origem, destino, data de ida/volta, passageiros) call searchFlights with those fields.
         - Use tools only when they improve the experience (weather, flight search/status, seats, payment). Do not force a flight-booking flow unless the user asks to book.
         - Output style:
           - Prefer short paragraphs and compact bullet points when listing an itinerary.
@@ -75,6 +77,18 @@ export async function POST(request: Request) {
       `,
     messages: coreMessages,
     tools: {
+      tripIntake: {
+        description:
+          "Show a trip details form (origin, destination, departure/return dates, passengers) to collect structured info",
+        parameters: z.object({
+          origin: z.string().optional(),
+          destination: z.string().optional(),
+          departureDate: z.string().optional(),
+          returnDate: z.string().optional(),
+          passengers: z.number().int().min(1).optional(),
+        }),
+        execute: async (args) => args,
+      },
       getWeather: {
         description:
           "Get the current weather for a city name (no latitude/longitude needed)",
@@ -143,11 +157,17 @@ export async function POST(request: Request) {
         parameters: z.object({
           origin: z.string().describe("Origin airport or city"),
           destination: z.string().describe("Destination airport or city"),
+          departureDate: z.string().optional().describe("Departure date (YYYY-MM-DD)"),
+          returnDate: z.string().optional().describe("Return date (YYYY-MM-DD)"),
+          passengers: z.number().int().min(1).optional().describe("Number of passengers"),
         }),
-        execute: async ({ origin, destination }) => {
+        execute: async ({ origin, destination, departureDate, returnDate, passengers }) => {
           const results = await generateSampleFlightSearchResults({
             origin,
             destination,
+            departureDate,
+            returnDate,
+            passengers,
           });
 
           return results;
