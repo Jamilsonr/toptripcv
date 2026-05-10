@@ -31,7 +31,7 @@ export const Navbar = async () => {
     return (
       <div className="bg-background absolute top-0 left-0 w-dvw py-3 px-4 flex flex-row items-center justify-between z-30">
         <div className="text-xl md:text-2xl font-semibold tracking-tight text-blue-600 dark:text-blue-500">
-          TopTrip
+          Top Trip
         </div>
         <LocaleSwitcher />
       </div>
@@ -47,7 +47,7 @@ export const Navbar = async () => {
             href="/"
             className="text-xl md:text-2xl font-semibold tracking-tight text-blue-600 dark:text-blue-500"
           >
-            TopTrip
+            Top Trip
           </Link>
         </div>
 
