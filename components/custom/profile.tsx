@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
@@ -132,6 +134,15 @@ export function Profile({
     <div className="min-h-dvh w-full bg-background">
       <div className="mx-auto w-full max-w-3xl px-4 pt-24 pb-10">
         <div className="flex flex-col gap-6">
+          <div className="flex items-center justify-between">
+            <Button variant="outline" asChild>
+              <Link href="/" className="gap-2">
+                <ArrowLeft size={16} />
+                <span>{t("back")}</span>
+              </Link>
+            </Button>
+          </div>
+
           <div className="rounded-3xl border bg-background/60 backdrop-blur-sm p-6 md:p-8 shadow-sm">
             <div className="flex flex-col gap-2">
               <div className="text-sm font-medium text-blue-700 dark:text-blue-400">
@@ -326,4 +337,3 @@ export function Profile({
     </div>
   );
 }
-
