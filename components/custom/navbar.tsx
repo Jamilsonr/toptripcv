@@ -30,7 +30,7 @@ export const Navbar = async () => {
   if (!session) {
     return (
       <div className="bg-background absolute top-0 left-0 w-dvw py-3 px-4 flex flex-row items-center justify-between z-30">
-        <div className="text-xl md:text-2xl font-semibold tracking-tight text-foreground">
+        <div className="text-xl md:text-2xl font-semibold tracking-tight text-blue-600 dark:text-blue-500">
           TopTrip
         </div>
         <LocaleSwitcher />
@@ -45,7 +45,7 @@ export const Navbar = async () => {
           <History user={session?.user} />
           <Link
             href="/"
-            className="text-xl md:text-2xl font-semibold tracking-tight text-foreground"
+            className="text-xl md:text-2xl font-semibold tracking-tight text-blue-600 dark:text-blue-500"
           >
             TopTrip
           </Link>
