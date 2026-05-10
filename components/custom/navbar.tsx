@@ -14,6 +14,15 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
+function getNameFromEmail(email: string) {
+  const localPart = email.split("@")[0] ?? "";
+  const firstToken = localPart.split(/[._-]/)[0] ?? localPart;
+  const match = firstToken.match(/^[a-zA-ZÀ-ÿ]+/);
+  const raw = (match?.[0] ?? firstToken).trim();
+  if (!raw) return email;
+  return raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
+}
+
 export const Navbar = async () => {
   let session = await auth();
   const t = await getTranslations("Navbar");
@@ -51,7 +60,9 @@ export const Navbar = async () => {
                 className="py-1.5 px-2 h-fit font-normal"
                 variant="secondary"
               >
-                {session.user?.email}
+                {session.user?.email
+                  ? getNameFromEmail(session.user.email)
+                  : t("profile")}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
