@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 import { auth, signOut } from "@/app/(auth)/auth";
 
 import { History } from "./history";
-import { LuggageIcon, SlashIcon } from "./icons";
 import { LocaleSwitcher } from "./locale-switcher";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
@@ -35,17 +34,12 @@ export const Navbar = async () => {
       <div className="bg-background absolute top-0 left-0 w-dvw py-2 px-3 justify-between flex flex-row items-center z-30">
         <div className="flex flex-row gap-3 items-center">
           <History user={session?.user} />
-          <div className="flex flex-row gap-2 items-center">
-            <div className="text-blue-600 dark:text-blue-500">
-              <LuggageIcon size={18} />
-            </div>
-            <div className="text-zinc-500">
-              <SlashIcon size={16} />
-            </div>
-            <div className="text-sm dark:text-zinc-300 truncate w-28 md:w-fit">
-              {t("appName")}
-            </div>
-          </div>
+          <Link
+            href="/"
+            className="text-xl md:text-2xl font-semibold tracking-tight text-foreground"
+          >
+            TopTrip
+          </Link>
         </div>
 
         <div className="flex flex-row gap-2 items-center">
