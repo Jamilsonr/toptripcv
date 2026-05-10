@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { auth, signOut } from "@/app/(auth)/auth";
@@ -60,6 +61,11 @@ export const Navbar = async () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
+              <DropdownMenuItem asChild>
+                <Link href="/profile" className="w-full">
+                  {t("profile")}
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <ThemeToggle />
               </DropdownMenuItem>

@@ -7,7 +7,22 @@
     "appName": "Top Trip",
     "logoAlt": "Gemini logo",
     "login": "Login",
+    "profile": "Profile",
     "logout": "Sign out"
+  },
+  "Profile": {
+    "kicker": "Account",
+    "title": "Your profile",
+    "subtitle": "Review and update your preferences so AI can plan trips that fit you better.",
+    "accountTitle": "Account",
+    "accountSubtitle": "Basic account information.",
+    "email": "Email",
+    "prefsTitle": "Travel preferences",
+    "prefsSubtitle": "These influence suggestions and the generated itinerary.",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "saved": "Preferences updated!",
+    "saveFailed": "Couldn't save. Please try again."
   },
   "Locale": {
     "pt": "Português",

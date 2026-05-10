@@ -7,7 +7,22 @@
     "appName": "Top Trip",
     "logoAlt": "Logótipo do Gemini",
     "login": "Iniciar sessão",
+    "profile": "Perfil",
     "logout": "Sair"
+  },
+  "Profile": {
+    "kicker": "Conta",
+    "title": "O teu perfil",
+    "subtitle": "Revê e ajusta as tuas preferências para a IA gerar viagens mais à tua medida.",
+    "accountTitle": "Conta",
+    "accountSubtitle": "Informação básica da tua conta.",
+    "email": "Email",
+    "prefsTitle": "Preferências de viagem",
+    "prefsSubtitle": "Isto influencia as sugestões e o itinerário gerado.",
+    "save": "Guardar alterações",
+    "saving": "A guardar…",
+    "saved": "Preferências atualizadas!",
+    "saveFailed": "Não foi possível guardar. Tenta novamente."
   },
   "Locale": {
     "pt": "Português",
