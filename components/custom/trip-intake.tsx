@@ -51,7 +51,6 @@ export function TripIntake({
       values.origin.trim().length > 0 &&
       values.destination.trim().length > 0 &&
       values.departureDate.trim().length > 0 &&
-      values.returnDate.trim().length > 0 &&
       values.passengers >= 1
     );
   }, [values]);
@@ -61,7 +60,7 @@ export function TripIntake({
 
     append({
       role: "user",
-      content: `Quero ver voos com estes dados: Origem: ${values.origin}. Destino: ${values.destination}. Ida: ${values.departureDate}. Volta: ${values.returnDate}. Passageiros: ${values.passengers}.`,
+      content: `Quero ver voos com estes dados: Origem: ${values.origin}. Destino: ${values.destination}. Ida: ${values.departureDate}.${values.returnDate.trim().length > 0 ? ` Volta: ${values.returnDate}.` : ""} Passageiros: ${values.passengers}.`,
     });
   }, [append, canSubmit, values]);
 

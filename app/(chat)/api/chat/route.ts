@@ -20,8 +20,21 @@ import {
 import { generateUUID } from "@/lib/utils";
 
 export async function POST(request: Request) {
-  const { id, messages }: { id: string; messages: Array<Message> } =
-    await request.json();
+  const {
+    id,
+    messages,
+    tripDefaults,
+  }: {
+    id: string;
+    messages: Array<Message>;
+    tripDefaults?: {
+      origin?: string;
+      destination?: string;
+      departureDate?: string;
+      returnDate?: string;
+      passengers?: number;
+    };
+  } = await request.json();
 
   const session = await auth();
 
@@ -59,6 +72,8 @@ export async function POST(request: Request) {
         - You are Top Trip, an AI travel assistant.
         - Always reply in Portuguese (pt-PT). Only switch language if the user clearly writes in another language.
         - If this is the first assistant response in a new chat, you MUST call tripIntake.
+        - Trip defaults (from the search form). If present and this is a new chat, call tripIntake with these values to prefill the form:
+          ${tripDefaults ? JSON.stringify(tripDefaults) : "null"}
         - After calling tripIntake, do NOT assume any trip values. Wait for the user to submit the form or provide the details in text.
         - Generative UI rule (to avoid unnecessary messages):
           - When you call a tool, your textual reply must be ONLY one short sentence and you must NOT ask any follow-up questions in the same message.

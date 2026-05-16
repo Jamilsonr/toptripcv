@@ -1,8 +1,9 @@
 import { auth } from "@/app/(auth)/auth";
-import { Chat } from "@/components/custom/chat";
 import { Onboarding } from "@/components/custom/onboarding";
 import { getUserPreferenceByUserId } from "@/db/queries";
 import { generateUUID } from "@/lib/utils";
+
+import { ChatPageClient } from "./chat-page-client";
 
 export default async function Page() {
   const session = await auth();
@@ -14,9 +15,10 @@ export default async function Page() {
   const pref = await getUserPreferenceByUserId({ id: session.user.id });
 
   if (!pref) {
-    return <Onboarding />;
+    return <Onboarding redirectTo="/chat" />;
   }
 
   const id = generateUUID();
-  return <Chat key={id} id={id} initialMessages={[]} />;
+  return <ChatPageClient chatId={id} />;
 }
+

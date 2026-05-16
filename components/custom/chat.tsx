@@ -12,14 +12,22 @@ import { MultimodalInput } from "./multimodal-input";
 export function Chat({
   id,
   initialMessages,
+  tripDefaults,
 }: {
   id: string;
   initialMessages: Array<Message>;
+  tripDefaults?: {
+    origin?: string;
+    destination?: string;
+    departureDate?: string;
+    returnDate?: string;
+    passengers?: number;
+  };
 }) {
   const { messages, handleSubmit, input, setInput, append, isLoading, stop } =
     useChat({
       id,
-      body: { id },
+      body: { id, tripDefaults },
       initialMessages,
       maxSteps: 10,
       onFinish: () => {
