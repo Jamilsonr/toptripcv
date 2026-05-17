@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import Image from "next/image";
 
 type Testimonial = {
   name: string;
@@ -58,9 +59,11 @@ export function Testemunhos() {
           {testimonials.map((t) => (
             <div key={t.name} className="rounded-2xl border bg-white p-6 shadow-sm">
               <div className="flex items-center gap-3">
-                <img
+                <Image
                   src={avatarUrl(t.prompt)}
                   alt={t.name}
+                  width={48}
+                  height={48}
                   className="size-12 rounded-full border object-cover"
                 />
                 <div className="flex flex-col">
@@ -89,4 +92,3 @@ export function Testemunhos() {
     </section>
   );
 }
-
