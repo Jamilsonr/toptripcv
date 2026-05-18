@@ -15,6 +15,15 @@ type Values = {
   passageiros: number;
 };
 
+const destinations = [
+  "Lisboa",
+  "Paris",
+  "Nova Iorque",
+  "Bangkok",
+  "Dubai",
+  "Barcelona",
+];
+
 export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -142,8 +151,14 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
                   value={values.destino}
                   onChange={(e) => setValues((v) => ({ ...v, destino: e.target.value }))}
                   placeholder="Para onde vais?"
+                  list="toptrip-destinos"
                   className="h-11 rounded-xl pl-10"
                 />
+                <datalist id="toptrip-destinos">
+                  {destinations.map((d) => (
+                    <option key={d} value={d} />
+                  ))}
+                </datalist>
               </div>
             </div>
 
