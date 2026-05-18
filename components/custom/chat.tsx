@@ -2,7 +2,7 @@
 
 import { Attachment, Message } from "ai";
 import { useChat } from "ai/react";
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Message as PreviewMessage } from "@/components/custom/message";
 import { useScrollToBottom } from "@/components/custom/use-scroll-to-bottom";
@@ -34,6 +34,31 @@ export function Chat({
         window.history.replaceState({}, "", `/chat/${id}`);
       },
     });
+
+  const hasAutoSent = useRef(false);
+  const autoSearchMessage = useMemo(() => {
+    const destination = tripDefaults?.destination?.trim();
+    const departureDate = tripDefaults?.departureDate?.trim();
+    if (!destination || !departureDate) return null;
+
+    const origin = tripDefaults?.origin?.trim() || "Lisboa";
+    const returnDate = tripDefaults?.returnDate?.trim();
+    const passengers = tripDefaults?.passengers ?? 1;
+
+    return `Quero ver voos com estes dados: Origem: ${origin}. Destino: ${destination}. Ida: ${departureDate}.${returnDate ? ` Volta: ${returnDate}.` : ""} Passageiros: ${passengers}.`;
+  }, [tripDefaults]);
+
+  useEffect(() => {
+    if (hasAutoSent.current) return;
+    if (!autoSearchMessage) return;
+    if (messages.length > 0) return;
+
+    hasAutoSent.current = true;
+    append({
+      role: "user",
+      content: autoSearchMessage,
+    });
+  }, [append, autoSearchMessage, messages.length]);
 
   const [messagesContainerRef, messagesEndRef] =
     useScrollToBottom<HTMLDivElement>();
