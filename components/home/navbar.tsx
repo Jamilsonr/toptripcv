@@ -1,7 +1,15 @@
-import { Plane } from "lucide-react";
+import { ChevronDown, Plane } from "lucide-react";
 import Link from "next/link";
 
+import { signOut } from "@/app/(auth)/auth";
+import { ThemeToggle } from "@/components/custom/theme-toggle";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import type { Session } from "next-auth";
 
@@ -60,14 +68,53 @@ export function Navbar({ session }: { session: Session | null }) {
               </>
             ) : (
               <>
-                <div className="flex items-center gap-2 rounded-full border bg-white px-2.5 py-1.5">
-                  <span className="flex size-7 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold text-white">
-                    {initial}
-                  </span>
-                  <span className="text-sm font-medium text-slate-900">
-                    {name ?? "Conta"}
-                  </span>
-                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="secondary"
+                      className="h-10 rounded-full border bg-white px-2.5 font-normal text-slate-900 hover:bg-slate-50"
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="flex size-7 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold text-white">
+                          {initial}
+                        </span>
+                        <span className="text-sm font-medium text-slate-900">
+                          {name ?? "Conta"}
+                        </span>
+                        <ChevronDown size={16} className="text-slate-500" />
+                      </span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link href="/profile" className="w-full">
+                        Perfil
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <ThemeToggle />
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="p-1">
+                      <form
+                        className="w-full"
+                        action={async () => {
+                          "use server";
+
+                          await signOut({
+                            redirectTo: "/",
+                          });
+                        }}
+                      >
+                        <button
+                          type="submit"
+                          className="w-full text-left px-1 py-0.5 text-red-600"
+                        >
+                          Sair
+                        </button>
+                      </form>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <Button className="bg-amber-500 text-slate-900 hover:bg-amber-400" asChild>
                   <Link href="/chat">Ir para o Chat</Link>
                 </Button>
@@ -109,9 +156,30 @@ export function Navbar({ session }: { session: Session | null }) {
                   </Button>
                 </>
               ) : (
-                <Button className="bg-amber-500 text-slate-900 hover:bg-amber-400" asChild>
-                  <Link href="/chat">Ir para o Chat</Link>
-                </Button>
+                <>
+                  <Button className="bg-amber-500 text-slate-900 hover:bg-amber-400" asChild>
+                    <Link href="/chat">Ir para o Chat</Link>
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <Link href="/profile">Perfil</Link>
+                  </Button>
+                  <div className="rounded-lg border bg-white px-3 py-2">
+                    <ThemeToggle />
+                  </div>
+                  <form
+                    action={async () => {
+                      "use server";
+
+                      await signOut({
+                        redirectTo: "/",
+                      });
+                    }}
+                  >
+                    <Button variant="outline" className="w-full text-red-600">
+                      Sair
+                    </Button>
+                  </form>
+                </>
               )}
             </div>
           </nav>
