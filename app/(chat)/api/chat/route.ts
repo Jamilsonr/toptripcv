@@ -65,15 +65,26 @@ export async function POST(request: Request) {
   const isNewChat =
     coreMessages.length === 1 && coreMessages[0]?.role === "user";
 
+  const hasAutoSearch =
+    Boolean(tripDefaults?.origin?.trim()) &&
+    Boolean(tripDefaults?.destination?.trim()) &&
+    Boolean(tripDefaults?.departureDate?.trim());
+
   const result = await streamText({
     model: geminiProModel,
-    toolChoice: isNewChat ? { type: "tool", toolName: "tripIntake" } : "auto",
+    toolChoice: isNewChat
+      ? hasAutoSearch
+        ? { type: "tool", toolName: "searchFlights" }
+        : { type: "tool", toolName: "tripIntake" }
+      : "auto",
     system: `\n
         - You are Top Trip, an AI travel assistant.
         - Always reply in Portuguese (pt-PT). Only switch language if the user clearly writes in another language.
-        - If this is the first assistant response in a new chat, you MUST call tripIntake.
-        - Trip defaults (from the search form). If present and this is a new chat, call tripIntake with these values to prefill the form:
+        - Trip defaults (from the search form):
           ${tripDefaults ? JSON.stringify(tripDefaults) : "null"}
+        - If this is the first assistant response in a new chat:
+          - If tripDefaults include origin, destination and departureDate, you MUST call searchFlights with those exact values (returnDate is optional, passengers is optional).
+          - Otherwise, you MUST call tripIntake (prefill it using tripDefaults if present).
         - After calling tripIntake, do NOT assume any trip values. Wait for the user to submit the form or provide the details in text.
         - Generative UI rule (to avoid unnecessary messages):
           - When you call a tool, your textual reply must be ONLY one short sentence and you must NOT ask any follow-up questions in the same message.
