@@ -3,7 +3,7 @@ import { NextAuthConfig } from "next-auth";
 export const authConfig = {
   pages: {
     signIn: "/login",
-    newUser: "/chat",
+    newUser: "/",
   },
   providers: [
     // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
@@ -19,7 +19,7 @@ export const authConfig = {
       let isOnApi = nextUrl.pathname.startsWith("/api");
 
       if (isLoggedIn && (isOnLogin || isOnRegister)) {
-        return Response.redirect(new URL("/chat", nextUrl));
+        return Response.redirect(new URL("/", nextUrl));
       }
 
       if (isOnRegister || isOnLogin) {

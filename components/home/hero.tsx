@@ -29,6 +29,33 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
+    if (typeof window === "undefined") return;
+
+    const stored = window.sessionStorage.getItem("toptrip_search_params");
+    if (!stored) return;
+
+    const params = new URLSearchParams(stored);
+    const origem = params.get("origem")?.trim() ?? "";
+    const destino = params.get("destino")?.trim() ?? "";
+    const dataIda = params.get("dataIda")?.trim() ?? "";
+    const dataVolta = params.get("dataVolta")?.trim() ?? "";
+    const passageiros = Math.min(
+      9,
+      Math.max(1, Number(params.get("passageiros") ?? "1")),
+    );
+
+    setValues({
+      origem,
+      destino,
+      dataIda,
+      dataVolta,
+      passageiros: Number.isFinite(passageiros) ? passageiros : 1,
+    });
+    window.sessionStorage.removeItem("toptrip_search_params");
+  }, [isAuthenticated]);
+
+  useEffect(() => {
     const destino = searchParams.get("destino")?.trim();
     if (!destino) return;
     setValues((v) => ({ ...v, destino }));
