@@ -66,7 +66,6 @@ export async function POST(request: Request) {
     coreMessages.length === 1 && coreMessages[0]?.role === "user";
 
   const hasAutoSearch =
-    Boolean(tripDefaults?.origin?.trim()) &&
     Boolean(tripDefaults?.destination?.trim()) &&
     Boolean(tripDefaults?.departureDate?.trim());
 
@@ -83,7 +82,7 @@ export async function POST(request: Request) {
         - Trip defaults (from the search form):
           ${tripDefaults ? JSON.stringify(tripDefaults) : "null"}
         - If this is the first assistant response in a new chat:
-          - If tripDefaults include origin, destination and departureDate, you MUST call searchFlights with those exact values (returnDate is optional, passengers is optional).
+          - If tripDefaults include destination and departureDate, you MUST call searchFlights with those values. Use origin = tripDefaults.origin if present, otherwise use "Lisboa".
           - Otherwise, you MUST call tripIntake (prefill it using tripDefaults if present).
         - After calling tripIntake, do NOT assume any trip values. Wait for the user to submit the form or provide the details in text.
         - Generative UI rule (to avoid unnecessary messages):
@@ -199,15 +198,21 @@ export async function POST(request: Request) {
       searchFlights: {
         description: "Search for flights based on the given parameters",
         parameters: z.object({
-          origin: z.string().describe("Origin airport or city"),
+          origin: z.string().optional().describe("Origin airport or city"),
           destination: z.string().describe("Destination airport or city"),
           departureDate: z.string().optional().describe("Departure date (YYYY-MM-DD)"),
           returnDate: z.string().optional().describe("Return date (YYYY-MM-DD)"),
           passengers: z.number().int().min(1).optional().describe("Number of passengers"),
         }),
-        execute: async ({ origin, destination, departureDate, returnDate, passengers }) => {
+        execute: async ({
+          origin,
+          destination,
+          departureDate,
+          returnDate,
+          passengers,
+        }) => {
           const results = await generateSampleFlightSearchResults({
-            origin,
+            origin: origin?.trim() ? origin : "Lisboa",
             destination,
             departureDate,
             returnDate,
