@@ -10,12 +10,41 @@ import { user, chat, User, reservation, userPreference } from "./schema";
 // Optionally, if not using email/pass login, you can
 // use the Drizzle adapter for Auth.js / NextAuth
 // https://authjs.dev/reference/adapter/drizzle
-let client = postgres(`${process.env.POSTGRES_URL!}?sslmode=require`);
-let db = drizzle(client);
+function getDatabaseUrl() {
+  const raw =
+    process.env.POSTGRES_URL ??
+    process.env.DATABASE_URL ??
+    process.env.POSTGRES_PRISMA_URL ??
+    process.env.POSTGRES_URL_NON_POOLING;
+
+  if (!raw) {
+    throw new Error(
+      "Database URL not defined. Set POSTGRES_URL (preferred) or DATABASE_URL.",
+    );
+  }
+
+  try {
+    const url = new URL(raw);
+    url.searchParams.set("sslmode", "require");
+    return url.toString();
+  } catch {
+    const joiner = raw.includes("?") ? "&" : "?";
+    return `${raw}${joiner}sslmode=require`;
+  }
+}
+
+let db: ReturnType<typeof drizzle> | null = null;
+
+function getDb() {
+  if (db) return db;
+  const client = postgres(getDatabaseUrl());
+  db = drizzle(client);
+  return db;
+}
 
 export async function getUser(email: string): Promise<Array<User>> {
   try {
-    return await db.select().from(user).where(eq(user.email, email));
+    return await getDb().select().from(user).where(eq(user.email, email));
   } catch (error) {
     console.error("Failed to get user from database");
     throw error;
@@ -27,7 +56,7 @@ export async function createUser(email: string, password: string) {
   let hash = hashSync(password, salt);
 
   try {
-    return await db.insert(user).values({ email, password: hash });
+    return await getDb().insert(user).values({ email, password: hash });
   } catch (error) {
     console.error("Failed to create user in database");
     throw error;
@@ -44,10 +73,10 @@ export async function saveChat({
   userId: string;
 }) {
   try {
-    const selectedChats = await db.select().from(chat).where(eq(chat.id, id));
+    const selectedChats = await getDb().select().from(chat).where(eq(chat.id, id));
 
     if (selectedChats.length > 0) {
-      return await db
+      return await getDb()
         .update(chat)
         .set({
           messages: JSON.stringify(messages),
@@ -55,7 +84,7 @@ export async function saveChat({
         .where(eq(chat.id, id));
     }
 
-    return await db.insert(chat).values({
+    return await getDb().insert(chat).values({
       id,
       createdAt: new Date(),
       messages: JSON.stringify(messages),
@@ -69,7 +98,7 @@ export async function saveChat({
 
 export async function deleteChatById({ id }: { id: string }) {
   try {
-    return await db.delete(chat).where(eq(chat.id, id));
+    return await getDb().delete(chat).where(eq(chat.id, id));
   } catch (error) {
     console.error("Failed to delete chat by id from database");
     throw error;
@@ -78,7 +107,7 @@ export async function deleteChatById({ id }: { id: string }) {
 
 export async function getChatsByUserId({ id }: { id: string }) {
   try {
-    return await db
+    return await getDb()
       .select()
       .from(chat)
       .where(eq(chat.userId, id))
@@ -91,7 +120,10 @@ export async function getChatsByUserId({ id }: { id: string }) {
 
 export async function getChatById({ id }: { id: string }) {
   try {
-    const [selectedChat] = await db.select().from(chat).where(eq(chat.id, id));
+    const [selectedChat] = await getDb()
+      .select()
+      .from(chat)
+      .where(eq(chat.id, id));
     return selectedChat;
   } catch (error) {
     console.error("Failed to get chat by id from database");
@@ -108,7 +140,7 @@ export async function createReservation({
   userId: string;
   details: any;
 }) {
-  return await db.insert(reservation).values({
+  return await getDb().insert(reservation).values({
     id,
     createdAt: new Date(),
     userId,
@@ -118,7 +150,7 @@ export async function createReservation({
 }
 
 export async function getReservationById({ id }: { id: string }) {
-  const [selectedReservation] = await db
+  const [selectedReservation] = await getDb()
     .select()
     .from(reservation)
     .where(eq(reservation.id, id));
@@ -133,7 +165,7 @@ export async function updateReservation({
   id: string;
   hasCompletedPayment: boolean;
 }) {
-  return await db
+  return await getDb()
     .update(reservation)
     .set({
       hasCompletedPayment,
@@ -142,7 +174,7 @@ export async function updateReservation({
 }
 
 export async function getUserPreferenceByUserId({ id }: { id: string }) {
-  const [selected] = await db
+  const [selected] = await getDb()
     .select()
     .from(userPreference)
     .where(eq(userPreference.userId, id));
@@ -161,7 +193,7 @@ export async function upsertUserPreference({
   const existing = await getUserPreferenceByUserId({ id: userId });
 
   if (existing) {
-    return await db
+    return await getDb()
       .update(userPreference)
       .set({
         updatedAt: now,
@@ -170,7 +202,7 @@ export async function upsertUserPreference({
       .where(eq(userPreference.userId, userId));
   }
 
-  return await db.insert(userPreference).values({
+  return await getDb().insert(userPreference).values({
     userId,
     createdAt: now,
     updatedAt: now,
