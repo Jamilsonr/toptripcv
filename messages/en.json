@@ -1,0 +1,203 @@
+{
+  "App": {
+    "title": "Top Trip",
+    "description": "Next.js chatbot template using the AI SDK and Gemini."
+  },
+  "Navbar": {
+    "appName": "Top Trip",
+    "logoAlt": "Gemini logo",
+    "login": "Login",
+    "profile": "Profile",
+    "logout": "Sign out"
+  },
+  "Profile": {
+    "kicker": "Account",
+    "title": "Your profile",
+    "subtitle": "Review and update your preferences so AI can plan trips that fit you better.",
+    "back": "Back",
+    "accountTitle": "Account",
+    "accountSubtitle": "Basic account information.",
+    "email": "Email",
+    "prefsTitle": "Travel preferences",
+    "prefsSubtitle": "These influence suggestions and the generated itinerary.",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "saved": "Preferences updated!",
+    "saveFailed": "Couldn't save. Please try again."
+  },
+  "Locale": {
+    "pt": "Português",
+    "en": "English",
+    "switch": "Language"
+  },
+  "Auth": {
+    "signInTitle": "Sign In",
+    "signInDescription": "Use your email and password to sign in",
+    "signInButton": "Sign in",
+    "invalidCredentials": "Invalid credentials!",
+    "invalidSubmission": "Failed validating your submission!",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Sign up",
+    "forFree": "for free.",
+    "signUpTitle": "Sign Up",
+    "signUpDescription": "Create an account with your email and password",
+    "signUpButton": "Sign Up",
+    "accountExists": "Account already exists",
+    "createAccountFailed": "Failed to create account",
+    "accountCreated": "Account created successfully",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInLink": "Sign in"
+  },
+  "Form": {
+    "email": "Email Address",
+    "password": "Password",
+    "loading": "Loading",
+    "submitForm": "Submit form"
+  },
+  "History": {
+    "title": "History",
+    "loading": "loading",
+    "chatsCount": "{count} chats",
+    "startNew": "Start a new chat",
+    "loginToSave": "Login to save and revisit previous chats!",
+    "noneFound": "No chats found",
+    "delete": "Delete",
+    "deleting": "Deleting chat...",
+    "deleted": "Chat deleted successfully",
+    "deleteFailed": "Failed to delete chat",
+    "confirmTitle": "Are you absolutely sure?",
+    "confirmDescription": "This action cannot be undone. This will permanently delete your chat and remove it from our servers.",
+    "cancel": "Cancel",
+    "continue": "Continue"
+  },
+  "Chat": {
+    "uploadFailed": "Failed to upload file, please try again!",
+    "placeholder": "Tell me the destination and dates…",
+    "waitModel": "Please wait for the model to finish its response!",
+    "suggest1Title": "Create full itinerary",
+    "suggest1Label": "Praia (CV) · 5 days",
+    "suggest1Action": "Create a complete 5-day itinerary for Praia, Cabo Verde.",
+    "suggest2Title": "Itinerary + weather",
+    "suggest2Label": "Lisbon · this weekend",
+    "suggest2Action": "I want an itinerary for Lisbon this weekend and also the weather forecast."
+  },
+  "TripIntake": {
+    "title": "Trip details",
+    "subtitle": "Fill this in so I can search flights accurately.",
+    "origin": "Origin",
+    "originPlaceholder": "e.g. Praia, CV or RAI",
+    "destination": "Destination",
+    "destinationPlaceholder": "e.g. Lisbon, PT or LIS",
+    "departure": "Departure date",
+    "return": "Return date",
+    "passengers": "People",
+    "submit": "Search flights"
+  },
+  "PreLogin": {
+    "brand": "Top Trip",
+    "tagline": "AI travel planning",
+    "pill": "1 click. Itinerary ready.",
+    "heroTitle": "Plan your trip in 1 click.",
+    "heroSubtitle": "You share the destination. AI delivers the full itinerary.",
+    "feature1Title": "Fast answers",
+    "feature1Desc": "Destination + dates. Done.",
+    "feature2Title": "Complete itinerary",
+    "feature2Desc": "Flights, timing, next steps.",
+    "feature3Title": "No friction",
+    "feature3Desc": "No searching. No stress."
+  },
+  "Overview": {
+    "brand": "Top Trip",
+    "tagline": "AI travel assistant",
+    "heroTitle": "Plan and book flights in minutes.",
+    "heroSubtitle": "Search options, check flight status, pick seats and create reservations in a fast, polished chat experience.",
+    "ctaPrimary": "Get started",
+    "ctaSecondary": "View docs",
+    "feature1Title": "Fast answers",
+    "feature1Desc": "Prompts and actions to go from zero to a reservation with less friction.",
+    "feature2Title": "Guided flows",
+    "feature2Desc": "Seats, payment and confirmation in clear, step-by-step UI.",
+    "feature3Title": "All in one place",
+    "feature3Desc": "History, attachments and context so you can pick up where you left off.",
+    "text": "This is an open source Chatbot template powered by the Google Gemini model built with Next.js and the AI SDK by Vercel. It uses the {streamText} function in the server and the {useChat} hook on the client to create a seamless chat experience.",
+    "learnMore": "You can learn more about the AI SDK by visiting the {docs}.",
+    "docs": "Docs"
+  },
+  "Onboarding": {
+    "kicker": "Personalization",
+    "title": "Let’s personalize your trip.",
+    "subtitle": "Answer 4 quick questions. The AI uses this to tailor your itinerary to your profile.",
+    "stepLabel": "Step {step} of {total}",
+    "qStyle": "What’s your travel style?",
+    "styleRelax": "Relax",
+    "styleBalanced": "Balanced",
+    "styleAdventure": "Adventure",
+    "qInterests": "What can’t be missing?",
+    "qInterestsHint": "Select one or more interests.",
+    "qInterestsOther": "Other (optional)",
+    "qInterestsOtherPlaceholder": "e.g. diving, hiking, photography… (comma-separated)",
+    "interest": {
+      "praia": "Beach",
+      "cultura": "Culture",
+      "gastronomia": "Food",
+      "natureza": "Nature",
+      "vida_noturna": "Nightlife",
+      "familia": "Family",
+      "compras": "Shopping"
+    },
+    "qPace": "What pace feels right?",
+    "paceSlow": "Slow",
+    "paceNormal": "Normal",
+    "paceFast": "Fast",
+    "qLikes": "What do you truly enjoy on trips?",
+    "qLikesPlaceholder": "e.g. beach, local food, museums, nature…",
+    "qAvoid": "What should we avoid?",
+    "qAvoidPlaceholder": "e.g. crowds, long hikes, late nights…",
+    "qLikesHint": "This helps the AI avoid suggestions that don’t fit you.",
+    "back": "Back",
+    "next": "Continue",
+    "finish": "Finish",
+    "saving": "Saving…",
+    "saved": "Preferences saved!",
+    "saveFailed": "Could not save. Please try again."
+  },
+  "Theme": {
+    "toggle": "Toggle {mode} mode",
+    "dark": "dark",
+    "light": "light"
+  },
+  "Attachments": {
+    "imageAltFallback": "An image attachment"
+  },
+  "Payments": {
+    "unknownError": "An unknown error occurred",
+    "verified": "Payment Verified",
+    "gatewayTimedOut": "Payment Gateway Timed Out",
+    "useSavedInfo": "Use your saved information for this transaction",
+    "enterMagicWord": "Enter the magic word to authorize payment. Hint: It rhymes with bercel.",
+    "magicWordPlaceholder": "Enter magic word...",
+    "verifySuccess": "Your payment transaction has been verified!",
+    "verifyFail": "Unable to verify your payment, please try again!"
+  },
+  "Flights": {
+    "seats": "Seats",
+    "flightNumber": "Flight Number",
+    "date": "Date",
+    "passenger": "Passenger",
+    "gate": "Gate",
+    "boards": "Boards",
+    "stops": "stops",
+    "hoursShort": "hr",
+    "roundTrip": "Round Trip",
+    "to": "to",
+    "hours": "hours",
+    "miles": "mi",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "continuePurchasingFrom": "Continue purchasing this reservation from",
+    "forPrice": "at"
+  },
+  "Common": {
+    "untitled": "Untitled"
+  }
+}

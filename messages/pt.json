@@ -1,0 +1,203 @@
+{
+  "App": {
+    "title": "Top Trip",
+    "description": "Chatbot em Next.js usando o AI SDK e o Gemini."
+  },
+  "Navbar": {
+    "appName": "Top Trip",
+    "logoAlt": "Logótipo do Gemini",
+    "login": "Iniciar sessão",
+    "profile": "Perfil",
+    "logout": "Sair"
+  },
+  "Profile": {
+    "kicker": "Conta",
+    "title": "O teu perfil",
+    "subtitle": "Revê e ajusta as tuas preferências para a IA gerar viagens mais à tua medida.",
+    "back": "Voltar",
+    "accountTitle": "Conta",
+    "accountSubtitle": "Informação básica da tua conta.",
+    "email": "Email",
+    "prefsTitle": "Preferências de viagem",
+    "prefsSubtitle": "Isto influencia as sugestões e o itinerário gerado.",
+    "save": "Guardar alterações",
+    "saving": "A guardar…",
+    "saved": "Preferências atualizadas!",
+    "saveFailed": "Não foi possível guardar. Tenta novamente."
+  },
+  "Locale": {
+    "pt": "Português",
+    "en": "English",
+    "switch": "Idioma"
+  },
+  "Auth": {
+    "signInTitle": "Iniciar sessão",
+    "signInDescription": "Usa o teu email e palavra-passe para iniciar sessão",
+    "signInButton": "Entrar",
+    "invalidCredentials": "Credenciais inválidas!",
+    "invalidSubmission": "Não foi possível validar os dados do formulário!",
+    "noAccount": "Ainda não tens conta?",
+    "signUpLink": "Registar",
+    "forFree": "grátis.",
+    "signUpTitle": "Criar conta",
+    "signUpDescription": "Cria uma conta com o teu email e palavra-passe",
+    "signUpButton": "Registar",
+    "accountExists": "A conta já existe",
+    "createAccountFailed": "Não foi possível criar a conta",
+    "accountCreated": "Conta criada com sucesso",
+    "alreadyHaveAccount": "Já tens conta?",
+    "signInLink": "Iniciar sessão"
+  },
+  "Form": {
+    "email": "Endereço de email",
+    "password": "Palavra-passe",
+    "loading": "A carregar",
+    "submitForm": "Submeter formulário"
+  },
+  "History": {
+    "title": "Histórico",
+    "loading": "a carregar",
+    "chatsCount": "{count} conversas",
+    "startNew": "Iniciar nova conversa",
+    "loginToSave": "Inicia sessão para guardar e rever conversas anteriores!",
+    "noneFound": "Nenhuma conversa encontrada",
+    "delete": "Eliminar",
+    "deleting": "A eliminar conversa...",
+    "deleted": "Conversa eliminada com sucesso",
+    "deleteFailed": "Não foi possível eliminar a conversa",
+    "confirmTitle": "Tens a certeza absoluta?",
+    "confirmDescription": "Esta ação não pode ser desfeita. A tua conversa será eliminada permanentemente e removida dos nossos servidores.",
+    "cancel": "Cancelar",
+    "continue": "Continuar"
+  },
+  "Chat": {
+    "uploadFailed": "Não foi possível enviar o ficheiro. Tenta novamente!",
+    "placeholder": "Diz o destino e datas…",
+    "waitModel": "Espera que o modelo termine a resposta!",
+    "suggest1Title": "Criar itinerário completo",
+    "suggest1Label": "Praia (CV) · 5 dias",
+    "suggest1Action": "Cria um itinerário completo de 5 dias em Praia, Cabo Verde.",
+    "suggest2Title": "Itinerário + clima",
+    "suggest2Label": "Lisboa · este fim‑de‑semana",
+    "suggest2Action": "Quero um itinerário para Lisboa este fim‑de‑semana e diz também o tempo previsto."
+  },
+  "TripIntake": {
+    "title": "Detalhes da viagem",
+    "subtitle": "Preenche para eu procurar voos com precisão.",
+    "origin": "Origem",
+    "originPlaceholder": "Ex.: Praia, CV ou RAI",
+    "destination": "Destino",
+    "destinationPlaceholder": "Ex.: Lisboa, PT ou LIS",
+    "departure": "Data de ida",
+    "return": "Data de volta",
+    "passengers": "Pessoas",
+    "submit": "Procurar voos"
+  },
+  "PreLogin": {
+    "brand": "Top Trip",
+    "tagline": "IA de viagens",
+    "pill": "1 clique. Itinerário pronto.",
+    "heroTitle": "Planeie sua viagem em 1 clique.",
+    "heroSubtitle": "Tu dizes o destino. A IA entrega o itinerário completo.",
+    "feature1Title": "Respostas rápidas",
+    "feature1Desc": "Destino + datas. Pronto.",
+    "feature2Title": "Itinerário completo",
+    "feature2Desc": "Voos, horários e passos.",
+    "feature3Title": "Sem complicações",
+    "feature3Desc": "Sem pesquisa. Sem stress."
+  },
+  "Overview": {
+    "brand": "Top Trip",
+    "tagline": "Assistente de viagens com IA",
+    "heroTitle": "Planeia e reserva voos em minutos.",
+    "heroSubtitle": "Pesquisa opções, acompanha o estado do voo, escolhe lugares e cria reservas numa experiência de chat rápida e bonita.",
+    "ctaPrimary": "Começar agora",
+    "ctaSecondary": "Ver documentação",
+    "feature1Title": "Respostas rápidas",
+    "feature1Desc": "Sugestões e ações para ir do zero à reserva sem fricção.",
+    "feature2Title": "Fluxos guiados",
+    "feature2Desc": "Seleção de lugares, pagamento e confirmação com passos claros.",
+    "feature3Title": "Tudo num só lugar",
+    "feature3Desc": "Histórico, anexos e contexto para retomar conversas quando quiseres.",
+    "text": "Este é um template open-source de chatbot alimentado pelo modelo Google Gemini, construído com Next.js e o AI SDK da Vercel. Usa a função {streamText} no servidor e o hook {useChat} no cliente para criar uma experiência de chat fluida.",
+    "learnMore": "Podes saber mais sobre o AI SDK ao visitar a {docs}.",
+    "docs": "Documentação"
+  },
+  "Onboarding": {
+    "kicker": "Personalização",
+    "title": "Vamos personalizar a tua viagem.",
+    "subtitle": "Responde a 4 perguntas rápidas. A IA usa isto para gerar um itinerário alinhado ao teu perfil.",
+    "stepLabel": "Passo {step} de {total}",
+    "qStyle": "Qual é o teu estilo de viagem?",
+    "styleRelax": "Relax",
+    "styleBalanced": "Equilibrado",
+    "styleAdventure": "Aventura",
+    "qInterests": "O que não pode faltar?",
+    "qInterestsHint": "Seleciona um ou mais interesses.",
+    "qInterestsOther": "Outro (opcional)",
+    "qInterestsOtherPlaceholder": "Ex.: mergulho, trilhas, fotografia… (separa por vírgulas)",
+    "interest": {
+      "praia": "Praia",
+      "cultura": "Cultura",
+      "gastronomia": "Gastronomia",
+      "natureza": "Natureza",
+      "vida_noturna": "Vida noturna",
+      "familia": "Família",
+      "compras": "Compras"
+    },
+    "qPace": "Qual é o ritmo ideal?",
+    "paceSlow": "Calmo",
+    "paceNormal": "Normal",
+    "paceFast": "Intenso",
+    "qLikes": "O que tu gostas mesmo numa viagem?",
+    "qLikesPlaceholder": "Ex.: praia, comida local, museus, natureza…",
+    "qAvoid": "O que queres evitar?",
+    "qAvoidPlaceholder": "Ex.: multidões, caminhadas longas, noitadas…",
+    "qLikesHint": "Isto ajuda a IA a evitar sugestões que não combinam contigo.",
+    "back": "Voltar",
+    "next": "Continuar",
+    "finish": "Concluir",
+    "saving": "A guardar…",
+    "saved": "Preferências guardadas!",
+    "saveFailed": "Não foi possível guardar. Tenta novamente."
+  },
+  "Theme": {
+    "toggle": "Mudar para modo {mode}",
+    "dark": "escuro",
+    "light": "claro"
+  },
+  "Attachments": {
+    "imageAltFallback": "Um anexo de imagem"
+  },
+  "Payments": {
+    "unknownError": "Ocorreu um erro desconhecido",
+    "verified": "Pagamento verificado",
+    "gatewayTimedOut": "Tempo limite do gateway de pagamento",
+    "useSavedInfo": "Usa a tua informação guardada para esta transação",
+    "enterMagicWord": "Introduz a palavra mágica para autorizar o pagamento. Dica: rima com bercel.",
+    "magicWordPlaceholder": "Introduz a palavra mágica...",
+    "verifySuccess": "O pagamento foi verificado!",
+    "verifyFail": "Não foi possível verificar o pagamento. Tenta novamente!"
+  },
+  "Flights": {
+    "seats": "Lugares",
+    "flightNumber": "Número do voo",
+    "date": "Data",
+    "passenger": "Passageiro",
+    "gate": "Porta",
+    "boards": "Embarque",
+    "stops": "escalas",
+    "hoursShort": "h",
+    "roundTrip": "Ida e volta",
+    "to": "para",
+    "hours": "horas",
+    "miles": "milhas",
+    "available": "Disponível",
+    "unavailable": "Indisponível",
+    "continuePurchasingFrom": "Continuar a compra desta reserva de",
+    "forPrice": "por"
+  },
+  "Common": {
+    "untitled": "Sem título"
+  }
+}
