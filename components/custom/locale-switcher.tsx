@@ -33,7 +33,7 @@ export function LocaleSwitcher() {
         <Button
           type="button"
           variant="outline"
-          className="h-9 px-3 gap-2 border-blue-200 text-blue-700 hover:bg-blue-50 hover:text-blue-800"
+          className="h-9 px-3 gap-2"
           aria-label={t("switch")}
         >
           <Languages size={16} />

@@ -1,3 +1,4 @@
+import { Plane } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
@@ -5,6 +6,7 @@ import { auth, signOut } from "@/app/(auth)/auth";
 
 import { History } from "./history";
 import { LocaleSwitcher } from "./locale-switcher";
+import { NavbarLoginCta } from "./navbar-login-cta";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
 import {
@@ -29,74 +31,87 @@ export const Navbar = async () => {
 
   if (!session) {
     return (
-      <div className="bg-background absolute top-0 left-0 w-dvw py-3 px-4 flex flex-row items-center justify-between z-30">
-        <div className="text-xl md:text-2xl font-semibold tracking-tight text-blue-600 dark:text-blue-500">
-          Top Trip
+      <header className="sticky top-0 z-40 w-full border-b bg-background/70 backdrop-blur">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="flex h-16 items-center justify-between gap-4">
+            <Link href="/" className="flex items-center gap-2">
+              <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                <Plane size={18} />
+              </span>
+              <span className="text-lg font-semibold tracking-tight text-foreground">
+                TopTrip
+              </span>
+            </Link>
+            <div className="flex flex-row gap-2 items-center">
+              <LocaleSwitcher />
+              <NavbarLoginCta label={t("login")} />
+            </div>
+          </div>
         </div>
-        <LocaleSwitcher />
-      </div>
+      </header>
     );
   }
 
   return (
-    <>
-      <div className="bg-background absolute top-0 left-0 w-dvw py-2 px-3 justify-between flex flex-row items-center z-30">
-        <div className="flex flex-row gap-3 items-center">
-          <History user={session?.user} />
-          <Link
-            href="/"
-            className="text-xl md:text-2xl font-semibold tracking-tight text-blue-600 dark:text-blue-500"
-          >
-            Top Trip
-          </Link>
-        </div>
+    <header className="sticky top-0 z-40 w-full border-b bg-background/70 backdrop-blur">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="flex h-16 items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <History user={session?.user} />
+            <Link href="/" className="flex items-center gap-2">
+              <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                <Plane size={18} />
+              </span>
+              <span className="text-lg font-semibold tracking-tight text-foreground">
+                TopTrip
+              </span>
+            </Link>
+          </div>
 
-        <div className="flex flex-row gap-2 items-center">
-          <LocaleSwitcher />
+          <div className="flex flex-row gap-2 items-center">
+            <LocaleSwitcher />
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                className="py-1.5 px-2 h-fit font-normal"
-                variant="secondary"
-              >
-                {session.user?.email
-                  ? getNameFromEmail(session.user.email)
-                  : t("profile")}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem asChild>
-                <Link href="/profile" className="w-full">
-                  {t("profile")}
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <ThemeToggle />
-              </DropdownMenuItem>
-              <DropdownMenuItem className="p-1 z-50">
-                <form
-                  className="w-full"
-                  action={async () => {
-                    "use server";
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button className="h-9 px-3 font-normal" variant="secondary">
+                  {session.user?.email
+                    ? getNameFromEmail(session.user.email)
+                    : t("profile")}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="w-full">
+                    {t("profile")}
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <ThemeToggle />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="p-1 z-50">
+                  <form
+                    className="w-full"
+                    action={async () => {
+                      "use server";
 
-                    await signOut({
-                      redirectTo: "/",
-                    });
-                  }}
-                >
-                  <button
-                    type="submit"
-                    className="w-full text-left px-1 py-0.5 text-red-500"
+                      await signOut({
+                        redirectTo: "/",
+                      });
+                    }}
                   >
-                    {t("logout")}
-                  </button>
-                </form>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                    <button
+                      type="submit"
+                      className="w-full text-left px-1 py-0.5 text-red-500"
+                    >
+                      {t("logout")}
+                    </button>
+                  </form>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
-    </>
+    </header>
   );
 };

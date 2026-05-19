@@ -223,7 +223,7 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
               <Button
                 type="button"
                 onClick={submit}
-                className="h-11 w-full md:w-auto bg-amber-500 text-slate-900 hover:bg-amber-400"
+                className="h-11 w-full md:w-auto"
               >
                 Pesquisar
               </Button>

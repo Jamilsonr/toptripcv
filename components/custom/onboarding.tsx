@@ -126,10 +126,10 @@ export function Onboarding({ redirectTo = "/" }: { redirectTo?: string }) {
 
   return (
     <div className="min-h-dvh w-full bg-background">
-      <div className="mx-auto w-full max-w-2xl px-4 pt-24 pb-10">
+      <div className="mx-auto w-full max-w-2xl px-4 py-10">
         <div className="rounded-3xl border bg-background/60 backdrop-blur-sm p-6 md:p-8 shadow-sm">
           <div className="flex flex-col gap-2">
-            <div className="text-sm font-medium text-blue-700 dark:text-blue-400">
+            <div className="text-sm font-medium text-primary">
               {t("kicker")}
             </div>
             <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">

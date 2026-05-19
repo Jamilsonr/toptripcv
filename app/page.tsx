@@ -11,7 +11,7 @@ export default async function Page() {
   const session = await auth();
 
   return (
-    <main className="min-h-dvh bg-white text-slate-900">
+    <main className="min-h-dvh">
       <Navbar session={session} />
       <Hero isAuthenticated={Boolean(session?.user)} />
       <ComoFunciona />

@@ -13,9 +13,8 @@ export function NavbarLoginCta({ label }: { label: string }) {
   }
 
   return (
-    <Button className="py-1.5 px-2 h-fit font-normal text-white" asChild>
+    <Button className="h-9 px-3 font-normal" asChild>
       <Link href="/login">{label}</Link>
     </Button>
   );
 }
-

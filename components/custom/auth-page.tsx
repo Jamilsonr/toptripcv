@@ -24,11 +24,11 @@ export function AuthPage({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-dvh w-full bg-white">
+    <div className="min-h-dvh w-full bg-background">
       <div className="mx-auto w-full max-w-5xl px-4 py-24 sm:px-6 lg:grid lg:grid-cols-2 lg:gap-10">
         <div className="hidden lg:flex flex-col justify-center gap-8">
           <div className="flex items-center gap-3">
-            <div className="size-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
+            <div className="size-11 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-sm">
               <Plane size={18} />
             </div>
             <div className="flex flex-col">
@@ -42,7 +42,7 @@ export function AuthPage({
           </div>
 
           <div className="flex flex-col gap-3">
-            <div className="w-fit rounded-full border bg-background/50 px-3 py-1 text-xs font-medium text-blue-700 dark:text-blue-400">
+            <div className="w-fit rounded-full border bg-background/50 px-3 py-1 text-xs font-medium text-primary">
               {marketing.pill}
             </div>
             <div className="text-4xl font-semibold tracking-tight text-foreground">
@@ -55,7 +55,7 @@ export function AuthPage({
 
           <div className="grid gap-3 max-w-md">
             <div className="flex items-start gap-3 rounded-2xl border bg-background/40 p-4">
-              <div className="text-blue-600">
+              <div className="text-primary">
                 <Sparkles size={18} />
               </div>
               <div className="flex flex-col gap-1">
@@ -69,7 +69,7 @@ export function AuthPage({
             </div>
 
             <div className="flex items-start gap-3 rounded-2xl border bg-background/40 p-4">
-              <div className="text-blue-600">
+              <div className="text-primary">
                 <ShieldCheck size={18} />
               </div>
               <div className="flex flex-col gap-1">
@@ -83,7 +83,7 @@ export function AuthPage({
             </div>
 
             <div className="flex items-start gap-3 rounded-2xl border bg-background/40 p-4">
-              <div className="text-blue-600">
+              <div className="text-primary">
                 <Plane size={18} />
               </div>
               <div className="flex flex-col gap-1">

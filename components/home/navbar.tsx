@@ -27,31 +27,31 @@ export function Navbar({ session }: { session: Session | null }) {
   const initial = name?.[0]?.toUpperCase() ?? "U";
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-white/70 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b bg-background/70 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2">
-            <span className="flex size-9 items-center justify-center rounded-xl bg-slate-900 text-white">
+            <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
               <Plane size={18} />
             </span>
-            <span className="text-lg font-semibold tracking-tight text-slate-900">
+            <span className="text-lg font-semibold tracking-tight text-foreground">
               TopTrip
             </span>
           </Link>
 
           <input id="toptrip-nav" type="checkbox" className="peer sr-only" />
 
-          <nav className="hidden items-center gap-6 text-sm text-slate-700 md:flex">
-            <Link href="/" className="hover:text-slate-900">
+          <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+            <Link href="/" className="hover:text-foreground">
               Home
             </Link>
-            <Link href="#destinos" className="hover:text-slate-900">
+            <Link href="#destinos" className="hover:text-foreground">
               Destinos
             </Link>
-            <Link href="#ofertas" className="hover:text-slate-900">
+            <Link href="#ofertas" className="hover:text-foreground">
               Ofertas
             </Link>
-            <Link href="#como-funciona" className="hover:text-slate-900">
+            <Link href="#como-funciona" className="hover:text-foreground">
               Como Funciona
             </Link>
           </nav>
@@ -62,7 +62,7 @@ export function Navbar({ session }: { session: Session | null }) {
                 <Button variant="outline" asChild>
                   <Link href="/login">Entrar</Link>
                 </Button>
-                <Button className="bg-amber-500 text-slate-900 hover:bg-amber-400" asChild>
+                <Button asChild>
                   <Link href="/register">Registar</Link>
                 </Button>
               </>
@@ -72,16 +72,16 @@ export function Navbar({ session }: { session: Session | null }) {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="secondary"
-                      className="h-10 rounded-full border bg-white px-2.5 font-normal text-slate-900 hover:bg-slate-50"
+                      className="h-10 rounded-full border bg-background px-2.5 font-normal text-foreground hover:bg-accent"
                     >
                       <span className="flex items-center gap-2">
-                        <span className="flex size-7 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold text-white">
+                        <span className="flex size-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
                           {initial}
                         </span>
-                        <span className="text-sm font-medium text-slate-900">
+                        <span className="text-sm font-medium text-foreground">
                           {name ?? "Conta"}
                         </span>
-                        <ChevronDown size={16} className="text-slate-500" />
+                        <ChevronDown size={16} className="text-muted-foreground" />
                       </span>
                     </Button>
                   </DropdownMenuTrigger>
@@ -115,7 +115,7 @@ export function Navbar({ session }: { session: Session | null }) {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                <Button className="bg-amber-500 text-slate-900 hover:bg-amber-400" asChild>
+                <Button asChild>
                   <Link href="/chat">Ir para o Chat</Link>
                 </Button>
               </>
@@ -124,24 +124,24 @@ export function Navbar({ session }: { session: Session | null }) {
 
           <label
             htmlFor="toptrip-nav"
-            className="flex items-center justify-center rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 md:hidden"
+            className="flex items-center justify-center rounded-lg border bg-background px-3 py-2 text-sm text-foreground md:hidden"
           >
             Menu
           </label>
         </div>
 
         <div className="hidden peer-checked:block md:hidden pb-4">
-          <nav className="flex flex-col gap-3 text-sm text-slate-700">
-            <Link href="/" className="hover:text-slate-900">
+          <nav className="flex flex-col gap-3 text-sm text-muted-foreground">
+            <Link href="/" className="hover:text-foreground">
               Home
             </Link>
-            <Link href="#destinos" className="hover:text-slate-900">
+            <Link href="#destinos" className="hover:text-foreground">
               Destinos
             </Link>
-            <Link href="#ofertas" className="hover:text-slate-900">
+            <Link href="#ofertas" className="hover:text-foreground">
               Ofertas
             </Link>
-            <Link href="#como-funciona" className="hover:text-slate-900">
+            <Link href="#como-funciona" className="hover:text-foreground">
               Como Funciona
             </Link>
 
@@ -151,19 +151,19 @@ export function Navbar({ session }: { session: Session | null }) {
                   <Button variant="outline" asChild>
                     <Link href="/login">Entrar</Link>
                   </Button>
-                  <Button className="bg-amber-500 text-slate-900 hover:bg-amber-400" asChild>
+                  <Button asChild>
                     <Link href="/register">Registar</Link>
                   </Button>
                 </>
               ) : (
                 <>
-                  <Button className="bg-amber-500 text-slate-900 hover:bg-amber-400" asChild>
+                  <Button asChild>
                     <Link href="/chat">Ir para o Chat</Link>
                   </Button>
                   <Button variant="outline" asChild>
                     <Link href="/profile">Perfil</Link>
                   </Button>
-                  <div className="rounded-lg border bg-white px-3 py-2">
+                  <div className="rounded-lg border bg-background px-3 py-2">
                     <ThemeToggle />
                   </div>
                   <form
