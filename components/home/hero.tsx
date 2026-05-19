@@ -5,9 +5,9 @@ import { MapPin, Users } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+import { AirportAutocomplete } from "@/components/ui/airport-autocomplete";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/date-picker";
-import { Input } from "@/components/ui/input";
 
 type Values = {
   origem: string;
@@ -16,15 +16,6 @@ type Values = {
   dataVolta: string;
   passageiros: number;
 };
-
-const destinations = [
-  "Lisboa",
-  "Paris",
-  "Nova Iorque",
-  "Bangkok",
-  "Dubai",
-  "Barcelona",
-];
 
 export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
   const router = useRouter();
@@ -131,37 +122,21 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
         <div className="mt-10 rounded-2xl bg-white/95 backdrop-blur border border-white/30 shadow-sm p-4 md:p-6">
           <div className="grid gap-3 md:flex md:flex-row md:flex-nowrap md:items-end">
             <div className="md:flex-1">
-              <div className="relative">
-                <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
-                  <MapPin size={18} />
-                </div>
-                <Input
-                  value={values.origem}
-                  onChange={(e) => setValues((v) => ({ ...v, origem: e.target.value }))}
-                  placeholder="De onde partes?"
-                  className="h-11 rounded-xl pl-10"
-                />
-              </div>
+              <AirportAutocomplete
+                value={values.origem}
+                onChange={(next) => setValues((v) => ({ ...v, origem: next }))}
+                placeholder="De onde partes?"
+                icon={MapPin}
+              />
             </div>
 
             <div className="md:flex-1">
-              <div className="relative">
-                <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
-                  <MapPin size={18} />
-                </div>
-                <Input
-                  value={values.destino}
-                  onChange={(e) => setValues((v) => ({ ...v, destino: e.target.value }))}
-                  placeholder="Para onde vais?"
-                  list="toptrip-destinos"
-                  className="h-11 rounded-xl pl-10"
-                />
-                <datalist id="toptrip-destinos">
-                  {destinations.map((d) => (
-                    <option key={d} value={d} />
-                  ))}
-                </datalist>
-              </div>
+              <AirportAutocomplete
+                value={values.destino}
+                onChange={(next) => setValues((v) => ({ ...v, destino: next }))}
+                placeholder="Para onde vais?"
+                icon={MapPin}
+              />
             </div>
 
             <div className="md:w-44">

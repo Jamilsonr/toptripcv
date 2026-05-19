@@ -6,6 +6,7 @@ import { PlaneTakeoff, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 
+import { AirportAutocomplete } from "../ui/airport-autocomplete";
 import { Button } from "../ui/button";
 import { DatePicker } from "../ui/date-picker";
 import { Input } from "../ui/input";
@@ -83,36 +84,26 @@ export function TripIntake({
             <Label htmlFor="trip-origin" className="text-sm">
               {t("origin")}
             </Label>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-blue-600">
-                <PlaneTakeoff size={18} />
-              </div>
-              <Input
-                id="trip-origin"
-                value={values.origin}
-                onChange={(e) => setField("origin", e.target.value)}
-                placeholder={t("originPlaceholder")}
-                className="h-11 rounded-xl pl-10 bg-white/70 border-blue-200 focus-visible:ring-blue-500"
-              />
-            </div>
+            <AirportAutocomplete
+              value={values.origin}
+              onChange={(next) => setField("origin", next)}
+              placeholder={t("originPlaceholder")}
+              icon={PlaneTakeoff}
+              inputClassName="bg-white/70 border-blue-200 focus-visible:ring-blue-500"
+            />
           </div>
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="trip-destination" className="text-sm">
               {t("destination")}
             </Label>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-blue-600">
-                <PlaneTakeoff size={18} />
-              </div>
-              <Input
-                id="trip-destination"
-                value={values.destination}
-                onChange={(e) => setField("destination", e.target.value)}
-                placeholder={t("destinationPlaceholder")}
-                className="h-11 rounded-xl pl-10 bg-white/70 border-blue-200 focus-visible:ring-blue-500"
-              />
-            </div>
+            <AirportAutocomplete
+              value={values.destination}
+              onChange={(next) => setField("destination", next)}
+              placeholder={t("destinationPlaceholder")}
+              icon={PlaneTakeoff}
+              inputClassName="bg-white/70 border-blue-200 focus-visible:ring-blue-500"
+            />
           </div>
         </div>
 
