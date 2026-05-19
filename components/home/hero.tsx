@@ -110,25 +110,26 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
       id="pesquisa"
       className="relative overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(90deg, rgba(15,23,42,0.88), rgba(30,64,175,0.78)), url(${heroImageUrl})`,
+        backgroundImage: `linear-gradient(90deg, rgba(15,23,42,0.65), rgba(30,64,175,0.55)), url(${heroImageUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
         <div className="max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">
-            Viaja mais, gasta menos.
+            Viaje mais, gaste menos
           </h1>
           <p className="mt-4 text-base md:text-lg text-white/85">
-            Encontra os melhores voos, hotéis e carros — tudo num só lugar, com a ajuda
-            da IA.
+            Encontra os melhores voos, hotéis e carros — tudo num só lugar, com a ajuda da
+            IA.
           </p>
         </div>
 
         <div className="mt-10 rounded-2xl bg-white/95 backdrop-blur border border-white/30 shadow-sm p-4 md:p-6">
-          <div className="grid gap-3 md:grid-cols-6">
-            <div className="md:col-span-2">
+          <div className="grid gap-3 md:flex md:flex-row md:flex-nowrap md:items-end">
+            <div className="md:flex-1">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <MapPin size={18} />
@@ -142,7 +143,7 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
               </div>
             </div>
 
-            <div className="md:col-span-2">
+            <div className="md:flex-1">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <MapPin size={18} />
@@ -162,7 +163,7 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
               </div>
             </div>
 
-            <div className="md:col-span-1">
+            <div className="md:w-44">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <CalendarDays size={18} />
@@ -176,7 +177,7 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
               </div>
             </div>
 
-            <div className="md:col-span-1">
+            <div className="md:w-44">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <CalendarDays size={18} />
@@ -189,10 +190,8 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
                 />
               </div>
             </div>
-          </div>
 
-          <div className="mt-3 grid gap-3 md:grid-cols-6">
-            <div className="md:col-span-2">
+            <div className="md:w-52">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <Users size={18} />
@@ -219,11 +218,11 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
               </div>
             </div>
 
-            <div className="md:col-span-4 flex items-stretch gap-3 md:justify-end">
+            <div className="md:w-32 md:shrink-0">
               <Button
                 type="button"
                 onClick={submit}
-                className="h-11 w-full md:w-auto"
+                className="h-11 w-full"
               >
                 Pesquisar
               </Button>
