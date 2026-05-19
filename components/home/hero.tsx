@@ -1,10 +1,12 @@
 "use client";
 
-import { CalendarDays, MapPin, Users } from "lucide-react";
+import { parseISO } from "date-fns";
+import { MapPin, Users } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/ui/date-picker";
 import { Input } from "@/components/ui/input";
 
 type Values = {
@@ -73,6 +75,10 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
   const canSubmit = useMemo(() => {
     return values.destino.trim().length > 0 && values.dataIda.trim().length > 0;
   }, [values.dataIda, values.destino]);
+
+  const minReturnDate = useMemo(() => {
+    return values.dataIda.trim() ? parseISO(values.dataIda) : undefined;
+  }, [values.dataIda]);
 
   const submit = () => {
     setError(null);
@@ -159,31 +165,28 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
             </div>
 
             <div className="md:w-44">
-              <div className="relative">
-                <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
-                  <CalendarDays size={18} />
-                </div>
-                <Input
-                  type="date"
-                  value={values.dataIda}
-                  onChange={(e) => setValues((v) => ({ ...v, dataIda: e.target.value }))}
-                  className="h-11 rounded-xl pl-10"
-                />
-              </div>
+              <DatePicker
+                value={values.dataIda}
+                onChange={(next) =>
+                  setValues((v) => {
+                    const shouldClearReturn =
+                      v.dataVolta.trim() && next.trim() && v.dataVolta < next;
+                    return {
+                      ...v,
+                      dataIda: next,
+                      dataVolta: shouldClearReturn ? "" : v.dataVolta,
+                    };
+                  })
+                }
+              />
             </div>
 
             <div className="md:w-44">
-              <div className="relative">
-                <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
-                  <CalendarDays size={18} />
-                </div>
-                <Input
-                  type="date"
-                  value={values.dataVolta}
-                  onChange={(e) => setValues((v) => ({ ...v, dataVolta: e.target.value }))}
-                  className="h-11 rounded-xl pl-10"
-                />
-              </div>
+              <DatePicker
+                value={values.dataVolta}
+                minDate={minReturnDate}
+                onChange={(next) => setValues((v) => ({ ...v, dataVolta: next }))}
+              />
             </div>
 
             <div className="md:w-52">

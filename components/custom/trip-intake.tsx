@@ -1,11 +1,13 @@
 "use client";
 
 import { useChat } from "ai/react";
-import { CalendarDays, PlaneTakeoff, Users } from "lucide-react";
+import { parseISO } from "date-fns";
+import { PlaneTakeoff, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 
 import { Button } from "../ui/button";
+import { DatePicker } from "../ui/date-picker";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
@@ -54,6 +56,10 @@ export function TripIntake({
       values.passengers >= 1
     );
   }, [values]);
+
+  const minReturnDate = useMemo(() => {
+    return values.departureDate.trim() ? parseISO(values.departureDate) : undefined;
+  }, [values.departureDate]);
 
   const submit = useCallback(() => {
     if (!canSubmit) return;
@@ -116,36 +122,33 @@ export function TripIntake({
             <Label htmlFor="trip-departure" className="text-sm">
               {t("departure")}
             </Label>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-blue-600">
-                <CalendarDays size={18} />
-              </div>
-              <Input
-                id="trip-departure"
-                type="date"
-                value={values.departureDate}
-                onChange={(e) => setField("departureDate", e.target.value)}
-                className="h-11 rounded-xl pl-10 bg-white/70 border-blue-200 focus-visible:ring-blue-500"
-              />
-            </div>
+            <DatePicker
+              value={values.departureDate}
+              onChange={(next) => {
+                setValues((v) => {
+                  const shouldClearReturn =
+                    v.returnDate.trim() && next.trim() && v.returnDate < next;
+                  return {
+                    ...v,
+                    departureDate: next,
+                    returnDate: shouldClearReturn ? "" : v.returnDate,
+                  };
+                });
+              }}
+              className="bg-white/70 border-blue-200 focus-visible:ring-blue-500"
+            />
           </div>
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="trip-return" className="text-sm">
               {t("return")}
             </Label>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-blue-600">
-                <CalendarDays size={18} />
-              </div>
-              <Input
-                id="trip-return"
-                type="date"
-                value={values.returnDate}
-                onChange={(e) => setField("returnDate", e.target.value)}
-                className="h-11 rounded-xl pl-10 bg-white/70 border-blue-200 focus-visible:ring-blue-500"
-              />
-            </div>
+            <DatePicker
+              value={values.returnDate}
+              minDate={minReturnDate}
+              onChange={(next) => setField("returnDate", next)}
+              className="bg-white/70 border-blue-200 focus-visible:ring-blue-500"
+            />
           </div>
 
           <div className="flex flex-col gap-2">
