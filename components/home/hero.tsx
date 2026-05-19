@@ -98,12 +98,7 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
     router.push(`/chat?${params.toString()}`);
   };
 
-  const heroImageUrl = useMemo(() => {
-    const prompt = encodeURIComponent(
-      "ultra realistic modern travel destination photo, coastal city sunset view, warm lights, minimal composition, high-end editorial photography, sharp focus, 35mm, no text, no watermark",
-    );
-    return `https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${prompt}&image_size=landscape_16_9`;
-  }, []);
+  const heroImageUrl = "/images/banner.jpg";
 
   return (
     <section
