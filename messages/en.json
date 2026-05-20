@@ -195,7 +195,9 @@
     "available": "Available",
     "unavailable": "Unavailable",
     "continuePurchasingFrom": "Continue purchasing this reservation from",
-    "forPrice": "at"
+    "forPrice": "at",
+    "resultsTitle": "Flights found",
+    "chooseThisFlight": "Choose this flight"
   },
   "Common": {
     "untitled": "Untitled"

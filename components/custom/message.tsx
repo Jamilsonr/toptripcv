@@ -30,25 +30,33 @@ export const Message = ({
   toolInvocations: Array<ToolInvocation> | undefined;
   attachments?: Array<Attachment>;
 }) => {
+  const isAssistant = role === "assistant";
+
   return (
     <motion.div
-      className={`flex flex-row gap-4 px-4 w-full md:w-[500px] md:px-0 first-of-type:pt-20`}
+      className={`flex w-full md:w-[500px] md:px-0 px-4 first-of-type:pt-20 ${isAssistant ? "flex-row" : "flex-row-reverse"} gap-3`}
       initial={{ y: 5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
-      <div className="size-[24px] border rounded-sm p-1 flex flex-col justify-center items-center shrink-0 text-zinc-500">
-        {role === "assistant" ? <BotIcon /> : <UserIcon />}
+      <div
+        className={`size-8 rounded-full flex flex-col justify-center items-center shrink-0 ${isAssistant ? "bg-muted text-zinc-500" : "bg-blue-600 text-white"}`}
+      >
+        {isAssistant ? <BotIcon /> : <UserIcon />}
       </div>
 
-      <div className="flex flex-col gap-2 w-full">
+      <div
+        className={`flex flex-col gap-2 flex-1 ${isAssistant ? "items-start" : "items-end"}`}
+      >
         {content && typeof content === "string" && (
-          <div className="text-zinc-800 dark:text-zinc-300 flex flex-col gap-4">
+          <div
+            className={`px-4 py-2 rounded-2xl max-w-[85%] text-sm leading-relaxed ${isAssistant ? "bg-muted text-foreground" : "bg-blue-600 text-white"}`}
+          >
             <Streamdown>{content}</Streamdown>
           </div>
         )}
 
         {toolInvocations && (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 w-full">
             {toolInvocations.map((toolInvocation) => {
               const { toolName, toolCallId, state } = toolInvocation;
               const normalizedToolName = toolName
@@ -60,7 +68,7 @@ export const Message = ({
                 const { result } = toolInvocation;
 
                 return (
-                  <div key={toolCallId}>
+                  <div key={toolCallId} className="w-full">
                     {toolName === "getWeather" ? (
                       Object.keys(result).includes("error") ? (
                         <div className="text-sm text-muted-foreground">
@@ -94,7 +102,7 @@ export const Message = ({
                 );
               } else {
                 return (
-                  <div key={toolCallId} className="skeleton">
+                  <div key={toolCallId} className="skeleton w-full">
                     {toolName === "getWeather" ? (
                       <Weather />
                     ) : toolName === "displayFlightStatus" ? (

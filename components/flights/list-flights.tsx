@@ -2,6 +2,7 @@
 
 import { useChat } from "ai/react";
 import { differenceInHours, format } from "date-fns";
+import { Plane } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const SAMPLE = {
@@ -89,65 +90,102 @@ export function ListFlights({
   });
 
   return (
-    <div className="rounded-lg bg-muted px-4 py-1.5 flex flex-col">
-      {results.flights.map((flight) => (
-        <div
-          key={flight.id}
-          className="cursor-pointer flex flex-row border-b dark:border-zinc-700 py-2 last-of-type:border-none group"
-          onClick={() => {
-            append({
-              role: "user",
-              content: `Quero escolher o voo da ${flight.airlines.join(", ")}.`,
-            });
-          }}
-        >
-          <div className="flex flex-col w-full gap-0.5 justify-between">
-            <div className="flex flex-row gap-0.5 text-base sm:text-base font-medium group-hover:underline">
-              <div className="text">
-                {format(new Date(flight.departure.timestamp), "HH:mm")}
-              </div>
-              <div className="no-skeleton">–</div>
-              <div className="text">
-                {format(new Date(flight.arrival.timestamp), "HH:mm")}
-              </div>
-            </div>
-            <div className="text w-fit hidden sm:flex text-sm text-muted-foreground flex-row gap-2">
-              <div>{flight.airlines.join(", ")}</div>
-            </div>
-            <div className="text sm:hidden text-xs sm:text-sm text-muted-foreground flex flex-row gap-2">
-              {flight.airlines.length} {t("stops")}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-0.5 justify-between">
-            <div className="flex flex-row gap-2">
-              <div className="text-base sm:text-base">
-                {differenceInHours(
-                  new Date(flight.arrival.timestamp),
-                  new Date(flight.departure.timestamp),
-                )}{" "}
-                {t("hoursShort")}
-              </div>
-            </div>
-            <div className="text-xs sm:text-sm text-muted-foreground flex flex-row">
-              <div>{flight.departure.airportCode}</div>
-              <div>–</div>
-              <div>{flight.arrival.airportCode}</div>
-            </div>
-          </div>
-
-          <div className="flex flex-col w-32 items-end gap-0.5">
-            <div className="flex flex-row gap-2">
-              <div className="text-base sm:text-base text-blue-600 dark:text-blue-500">
-                ${flight.priceInUSD}
-              </div>
-            </div>
-            <div className="text-xs sm:text-sm text-muted-foreground flex flex-row">
-              {t("roundTrip")}
-            </div>
-          </div>
+    <div className="rounded-3xl border bg-background/60 backdrop-blur-sm p-4 shadow-sm">
+      <div className="flex flex-row items-center gap-3">
+        <div className="size-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
+          <Plane size={18} />
         </div>
-      ))}
+        <div className="text-sm font-medium text-foreground">
+          {t("resultsTitle")}
+        </div>
+      </div>
+
+      <div className="-mx-4 mt-4 px-4 overflow-x-auto">
+        <div className="flex flex-row gap-4 pb-2 snap-x snap-mandatory">
+          {results.flights.map((flight) => {
+            const duration = differenceInHours(
+              new Date(flight.arrival.timestamp),
+              new Date(flight.departure.timestamp),
+            );
+
+            const initials = flight.airlines[0]
+              .split(" ")
+              .filter(Boolean)
+              .slice(0, 2)
+              .map((w) => w[0]?.toUpperCase())
+              .join("");
+
+            return (
+              <button
+                key={flight.id}
+                type="button"
+                className="flex-none w-[280px] rounded-2xl border bg-background p-4 text-left shadow-sm hover:shadow-md transition-shadow snap-start"
+                onClick={() => {
+                  append({
+                    role: "user",
+                    content: `Quero escolher o voo da ${flight.airlines.join(", ")}.`,
+                  });
+                }}
+              >
+                <div className="flex flex-row items-center gap-3">
+                  <div className="size-10 rounded-2xl bg-muted flex items-center justify-center text-sm font-semibold text-foreground">
+                    {initials}
+                  </div>
+
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <div className="text-sm font-semibold text-foreground truncate">
+                      {flight.airlines[0]}
+                    </div>
+                    <div className="text-xs text-muted-foreground truncate">
+                      {t("roundTrip")}
+                    </div>
+                  </div>
+
+                  <div className="text-blue-600 dark:text-blue-500 font-semibold">
+                    ${flight.priceInUSD}
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-row items-end justify-between">
+                  <div className="flex flex-col">
+                    <div className="text-lg font-semibold text-foreground">
+                      {format(new Date(flight.departure.timestamp), "HH:mm")}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {flight.departure.airportCode}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="text-xs text-muted-foreground">
+                      {duration} {t("hoursShort")}
+                    </div>
+                    <div className="w-16 h-px bg-border" />
+                    <div className="text-xs text-muted-foreground">
+                      {flight.numberOfStops} {t("stops")}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-end">
+                    <div className="text-lg font-semibold text-foreground">
+                      {format(new Date(flight.arrival.timestamp), "HH:mm")}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {flight.arrival.airportCode}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <div className="w-full rounded-full bg-zinc-900 text-white py-2 text-center text-sm font-medium dark:bg-white dark:text-zinc-900">
+                    {t("chooseThisFlight")}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
