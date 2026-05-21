@@ -90,18 +90,18 @@ export function ListFlights({
   });
 
   return (
-    <div className="rounded-3xl border bg-background/60 backdrop-blur-sm p-4 shadow-sm">
+    <div className="rounded-3xl border bg-muted/30 p-6">
       <div className="flex flex-row items-center gap-3">
         <div className="size-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
           <Plane size={18} />
         </div>
-        <div className="text-sm font-medium text-foreground">
+        <div className="text-lg font-semibold text-foreground">
           {t("resultsTitle")}
         </div>
       </div>
 
-      <div className="-mx-4 mt-4 px-4 overflow-x-auto">
-        <div className="flex flex-row gap-4 pb-2 snap-x snap-mandatory">
+      <div className="-mx-6 mt-5 px-6 overflow-x-auto scroll-smooth">
+        <div className="flex flex-row gap-5 pb-2 snap-x snap-mandatory">
           {results.flights.map((flight) => {
             const duration = differenceInHours(
               new Date(flight.arrival.timestamp),
@@ -119,7 +119,7 @@ export function ListFlights({
               <button
                 key={flight.id}
                 type="button"
-                className="flex-none w-[280px] rounded-2xl border bg-background p-4 text-left shadow-sm hover:shadow-md transition-shadow snap-start"
+                className="flex-none w-[320px] rounded-3xl border bg-background p-5 text-left shadow-sm hover:shadow-md transition-shadow snap-start"
                 onClick={() => {
                   append({
                     role: "user",
@@ -128,7 +128,7 @@ export function ListFlights({
                 }}
               >
                 <div className="flex flex-row items-center gap-3">
-                  <div className="size-10 rounded-2xl bg-muted flex items-center justify-center text-sm font-semibold text-foreground">
+                  <div className="size-11 rounded-full bg-muted flex items-center justify-center text-sm font-semibold text-foreground">
                     {initials}
                   </div>
 
@@ -141,12 +141,12 @@ export function ListFlights({
                     </div>
                   </div>
 
-                  <div className="text-blue-600 dark:text-blue-500 font-semibold">
+                  <div className="text-blue-600 dark:text-blue-500 text-lg font-semibold">
                     ${flight.priceInUSD}
                   </div>
                 </div>
 
-                <div className="mt-4 flex flex-row items-end justify-between">
+                <div className="mt-5 flex flex-row items-end justify-between">
                   <div className="flex flex-col">
                     <div className="text-lg font-semibold text-foreground">
                       {format(new Date(flight.departure.timestamp), "HH:mm")}
@@ -160,7 +160,7 @@ export function ListFlights({
                     <div className="text-xs text-muted-foreground">
                       {duration} {t("hoursShort")}
                     </div>
-                    <div className="w-16 h-px bg-border" />
+                    <div className="w-20 h-px bg-border" />
                     <div className="text-xs text-muted-foreground">
                       {flight.numberOfStops} {t("stops")}
                     </div>
@@ -176,8 +176,8 @@ export function ListFlights({
                   </div>
                 </div>
 
-                <div className="mt-4">
-                  <div className="w-full rounded-full bg-zinc-900 text-white py-2 text-center text-sm font-medium dark:bg-white dark:text-zinc-900">
+                <div className="mt-5">
+                  <div className="w-full rounded-full bg-zinc-900 text-white py-2.5 text-center text-sm font-medium dark:bg-white dark:text-zinc-900">
                     {t("chooseThisFlight")}
                   </div>
                 </div>

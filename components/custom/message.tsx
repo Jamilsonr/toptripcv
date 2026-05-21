@@ -34,12 +34,12 @@ export const Message = ({
 
   return (
     <motion.div
-      className={`flex w-full md:w-[500px] md:px-0 px-4 first-of-type:pt-20 ${isAssistant ? "flex-row" : "flex-row-reverse"} gap-3`}
+      className={`flex w-full max-w-[720px] px-4 md:px-0 first-of-type:pt-20 ${isAssistant ? "flex-row" : "flex-row-reverse"} gap-3`}
       initial={{ y: 5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
       <div
-        className={`size-8 rounded-full flex flex-col justify-center items-center shrink-0 ${isAssistant ? "bg-muted text-zinc-500" : "bg-blue-600 text-white"}`}
+        className={`size-9 rounded-2xl flex flex-col justify-center items-center shrink-0 border ${isAssistant ? "bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-900" : "bg-zinc-900 text-white border-zinc-900 dark:bg-zinc-100 dark:text-zinc-900 dark:border-zinc-100"}`}
       >
         {isAssistant ? <BotIcon /> : <UserIcon />}
       </div>
@@ -49,7 +49,7 @@ export const Message = ({
       >
         {content && typeof content === "string" && (
           <div
-            className={`px-4 py-2 rounded-2xl max-w-[85%] text-sm leading-relaxed ${isAssistant ? "bg-muted text-foreground" : "bg-blue-600 text-white"}`}
+            className={`px-4 py-3 max-w-[85%] text-sm leading-relaxed shadow-sm ${isAssistant ? "bg-background border border-border text-foreground rounded-2xl rounded-tl-md" : "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 rounded-2xl rounded-tr-md"}`}
           >
             <Streamdown>{content}</Streamdown>
           </div>
