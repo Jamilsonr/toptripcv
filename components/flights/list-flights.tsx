@@ -100,20 +100,8 @@ export function ListFlights({
         </div>
       </div>
 
-      <div
-        className="-mx-6 mt-5 px-6 overflow-x-auto overflow-y-hidden scroll-smooth overscroll-contain touch-pan-x"
-        onWheelCapture={(e) => {
-          const el = e.currentTarget;
-          const canScrollX = el.scrollWidth > el.clientWidth;
-          if (!canScrollX) return;
-
-          e.preventDefault();
-          const delta =
-            Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-          el.scrollLeft += delta;
-        }}
-      >
-        <div className="flex flex-row gap-5 pb-2 snap-x snap-mandatory">
+      <div className="mt-5 w-full overflow-x-auto overflow-y-hidden">
+        <div className="flex flex-row gap-5 pb-3 snap-x snap-mandatory w-max">
           {results.flights.map((flight) => {
             const duration = differenceInHours(
               new Date(flight.arrival.timestamp),

@@ -70,7 +70,7 @@ export function Chat({
       <div className="flex flex-col justify-between items-center gap-4 w-full md:max-w-[720px]">
         <div
           ref={messagesContainerRef}
-          className="flex flex-col gap-4 size-full items-center overflow-y-scroll px-4 md:px-0"
+          className="flex flex-col gap-4 size-full items-center overflow-y-scroll overflow-x-hidden px-4 md:px-0"
         >
           {messages.map((message) => (
             <PreviewMessage
