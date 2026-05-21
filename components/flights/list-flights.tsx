@@ -100,7 +100,15 @@ export function ListFlights({
         </div>
       </div>
 
-      <div className="-mx-6 mt-5 px-6 overflow-x-auto scroll-smooth">
+      <div
+        className="-mx-6 mt-5 px-6 overflow-x-auto overflow-y-hidden scroll-smooth overscroll-x-contain touch-pan-x"
+        onWheel={(e) => {
+          if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            e.currentTarget.scrollLeft += e.deltaY;
+            e.preventDefault();
+          }
+        }}
+      >
         <div className="flex flex-row gap-5 pb-2 snap-x snap-mandatory">
           {results.flights.map((flight) => {
             const duration = differenceInHours(
@@ -140,10 +148,6 @@ export function ListFlights({
                       {t("roundTrip")}
                     </div>
                   </div>
-
-                  <div className="text-blue-600 dark:text-blue-500 text-lg font-semibold">
-                    ${flight.priceInUSD}
-                  </div>
                 </div>
 
                 <div className="mt-5 flex flex-row items-end justify-between">
@@ -176,7 +180,14 @@ export function ListFlights({
                   </div>
                 </div>
 
-                <div className="mt-5">
+                <div className="mt-5 text-center">
+                  <div className="text-blue-600 dark:text-blue-500 text-2xl font-semibold leading-none">
+                    ${flight.priceInUSD}
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    {t("roundTrip")}
+                  </div>
+
                   <div className="w-full rounded-full bg-zinc-900 text-white py-2.5 text-center text-sm font-medium dark:bg-white dark:text-zinc-900">
                     {t("chooseThisFlight")}
                   </div>
