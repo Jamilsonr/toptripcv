@@ -100,7 +100,19 @@ export function ListFlights({
         </div>
       </div>
 
-      <div className="mt-5 w-full overflow-x-auto overflow-y-hidden">
+      <div
+        className="mt-5 w-full overflow-x-scroll overflow-y-hidden overscroll-contain"
+        onWheelCapture={(e) => {
+          const el = e.currentTarget;
+          const canScrollX = el.scrollWidth > el.clientWidth;
+          if (!canScrollX) return;
+
+          e.preventDefault();
+          const delta =
+            Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+          el.scrollLeft += delta;
+        }}
+      >
         <div className="flex flex-row gap-5 pb-3 snap-x snap-mandatory w-max">
           {results.flights.map((flight) => {
             const duration = differenceInHours(
