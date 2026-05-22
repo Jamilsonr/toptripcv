@@ -113,7 +113,7 @@ export function ListFlights({
           el.scrollLeft += delta;
         }}
       >
-        <div className="flex flex-row gap-5 pb-3 snap-x snap-mandatory w-max">
+        <div className="inline-flex gap-5 pb-3 pr-6 snap-x snap-mandatory min-w-max">
           {results.flights.map((flight) => {
             const duration = differenceInHours(
               new Date(flight.arrival.timestamp),
