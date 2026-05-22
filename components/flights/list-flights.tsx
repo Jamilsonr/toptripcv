@@ -90,7 +90,7 @@ export function ListFlights({
   });
 
   return (
-    <div className="rounded-3xl border bg-muted/30 p-6">
+    <div className="w-full max-w-full rounded-3xl border bg-muted/30 p-6">
       <div className="flex flex-row items-center gap-3">
         <div className="size-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
           <Plane size={18} />
@@ -101,7 +101,7 @@ export function ListFlights({
       </div>
 
       <div
-        className="mt-5 w-full overflow-x-scroll overflow-y-hidden overscroll-contain"
+        className="mt-5 w-full max-w-full overflow-x-scroll overflow-y-hidden overscroll-contain snap-x snap-mandatory touch-pan-x"
         onWheelCapture={(e) => {
           const el = e.currentTarget;
           const canScrollX = el.scrollWidth > el.clientWidth;
@@ -113,7 +113,7 @@ export function ListFlights({
           el.scrollLeft += delta;
         }}
       >
-        <div className="inline-flex gap-5 pb-3 pr-6 snap-x snap-mandatory min-w-max">
+        <div className="inline-flex gap-5 pb-3 pr-6 min-w-max">
           {results.flights.map((flight) => {
             const duration = differenceInHours(
               new Date(flight.arrival.timestamp),
