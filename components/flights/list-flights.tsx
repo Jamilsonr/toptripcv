@@ -4,6 +4,7 @@ import { useChat } from "ai/react";
 import { differenceInHours, format } from "date-fns";
 import { Plane } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
 
 const SAMPLE = {
   flights: [
@@ -89,6 +90,13 @@ export function ListFlights({
     maxSteps: 5,
   });
 
+  const dragRef = useRef({
+    isDown: false,
+    startX: 0,
+    startScrollLeft: 0,
+    dragged: false,
+  });
+
   return (
     <div className="w-full max-w-full rounded-3xl border bg-muted/30 p-6">
       <div className="flex flex-row items-center gap-3">
@@ -101,16 +109,46 @@ export function ListFlights({
       </div>
 
       <div
-        className="mt-5 w-full max-w-full overflow-x-scroll overflow-y-hidden overscroll-contain snap-x snap-mandatory touch-pan-x"
-        onWheelCapture={(e) => {
+        className="mt-5 w-full max-w-full overflow-x-scroll overflow-y-hidden overscroll-contain snap-x snap-mandatory touch-pan-x cursor-grab active:cursor-grabbing"
+        onWheel={(e) => {
           const el = e.currentTarget;
           const canScrollX = el.scrollWidth > el.clientWidth;
           if (!canScrollX) return;
 
-          e.preventDefault();
           const delta =
             Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-          el.scrollLeft += delta;
+          const maxScrollLeft = el.scrollWidth - el.clientWidth;
+          const nextScrollLeft = Math.max(
+            0,
+            Math.min(maxScrollLeft, el.scrollLeft + delta),
+          );
+
+          if (nextScrollLeft === el.scrollLeft) return;
+          e.preventDefault();
+          el.scrollLeft = nextScrollLeft;
+        }}
+        onPointerDown={(e) => {
+          if (e.pointerType === "mouse" && e.button !== 0) return;
+          const el = e.currentTarget;
+          dragRef.current.isDown = true;
+          dragRef.current.dragged = false;
+          dragRef.current.startX = e.clientX;
+          dragRef.current.startScrollLeft = el.scrollLeft;
+          el.setPointerCapture(e.pointerId);
+        }}
+        onPointerMove={(e) => {
+          if (!dragRef.current.isDown) return;
+          const el = e.currentTarget;
+          const dx = e.clientX - dragRef.current.startX;
+          if (Math.abs(dx) > 4) dragRef.current.dragged = true;
+          el.scrollLeft = dragRef.current.startScrollLeft - dx;
+          if (dragRef.current.dragged) e.preventDefault();
+        }}
+        onPointerUp={() => {
+          dragRef.current.isDown = false;
+        }}
+        onPointerCancel={() => {
+          dragRef.current.isDown = false;
         }}
       >
         <div className="inline-flex gap-5 pb-3 pr-6 min-w-max">
@@ -133,6 +171,10 @@ export function ListFlights({
                 type="button"
                 className="flex-none w-[320px] rounded-3xl border bg-background p-5 text-left shadow-sm hover:shadow-md transition-shadow snap-start"
                 onClick={() => {
+                  if (dragRef.current.dragged) {
+                    dragRef.current.dragged = false;
+                    return;
+                  }
                   append({
                     role: "user",
                     content: `Quero escolher o voo da ${flight.airlines.join(", ")}.`,
