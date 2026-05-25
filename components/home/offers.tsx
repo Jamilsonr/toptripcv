@@ -11,13 +11,13 @@ const offers = [
 
 export function Ofertas() {
   return (
-    <section id="ofertas" className="bg-blue-50/60">
+    <section id="ofertas" className="bg-muted/40">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
         <div className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
             Ofertas da semana
           </h2>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-3 text-muted-foreground">
             Promoções selecionadas (dados mockados por agora).
           </p>
         </div>
@@ -26,18 +26,18 @@ export function Ofertas() {
           {offers.map((offer) => (
             <div
               key={offer.route}
-              className="rounded-2xl border bg-white p-6 shadow-sm"
+              className="rounded-2xl border bg-background p-6 shadow-sm"
             >
               <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-slate-900">
+                <div className="text-sm font-semibold text-foreground">
                   {offer.route}
                 </div>
-                <div className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
+                <div className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
                   <BadgePercent size={14} />
                   Promoção
                 </div>
               </div>
-              <div className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
+              <div className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
                 {offer.price}
               </div>
               <div className="mt-6">

@@ -23,13 +23,13 @@ const steps = [
 
 export function ComoFunciona() {
   return (
-    <section id="como-funciona" className="bg-white">
+    <section id="como-funciona" className="bg-background">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
         <div className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
             Como funciona o TopTrip?
           </h2>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-3 text-muted-foreground">
             Um fluxo simples para encontrares as melhores opções com ajuda da IA.
           </p>
         </div>
@@ -38,18 +38,18 @@ export function ComoFunciona() {
           {steps.map(({ number, title, description, Icon }) => (
             <div
               key={number}
-              className="rounded-2xl border bg-white p-6 shadow-sm"
+              className="rounded-2xl border bg-background p-6 shadow-sm"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex size-11 items-center justify-center rounded-2xl bg-slate-900 text-white">
+                  <div className="flex size-11 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
                     <Icon size={18} />
                   </div>
-                  <div className="text-sm font-semibold text-slate-900">{title}</div>
+                  <div className="text-sm font-semibold text-foreground">{title}</div>
                 </div>
-                <div className="text-sm font-semibold text-amber-600">#{number}</div>
+                <div className="text-sm font-semibold text-primary">#{number}</div>
               </div>
-              <div className="mt-4 text-sm text-slate-600">{description}</div>
+              <div className="mt-4 text-sm text-muted-foreground">{description}</div>
             </div>
           ))}
         </div>
@@ -57,4 +57,3 @@ export function ComoFunciona() {
     </section>
   );
 }
-

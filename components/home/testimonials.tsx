@@ -44,20 +44,20 @@ function avatarUrl(prompt: string) {
 
 export function Testemunhos() {
   return (
-    <section className="bg-white">
+    <section className="bg-background">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
         <div className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
             O que dizem os nossos utilizadores
           </h2>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-3 text-muted-foreground">
             Pessoas reais, feedback real (dados mockados).
           </p>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {testimonials.map((t) => (
-            <div key={t.name} className="rounded-2xl border bg-white p-6 shadow-sm">
+            <div key={t.name} className="rounded-2xl border bg-background p-6 shadow-sm">
               <div className="flex items-center gap-3">
                 <Image
                   src={avatarUrl(t.prompt)}
@@ -67,24 +67,24 @@ export function Testemunhos() {
                   className="size-12 rounded-full border object-cover"
                 />
                 <div className="flex flex-col">
-                  <div className="text-sm font-semibold text-slate-900">
+                  <div className="text-sm font-semibold text-foreground">
                     {t.name}
                   </div>
-                  <div className="text-xs text-slate-600">{t.country}</div>
+                  <div className="text-xs text-muted-foreground">{t.country}</div>
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center gap-1 text-amber-500">
+              <div className="mt-4 flex items-center gap-1 text-primary">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
                     size={16}
-                    className={i < t.rating ? "fill-amber-500" : "opacity-30"}
+                    className={i < t.rating ? "fill-primary" : "opacity-30"}
                   />
                 ))}
               </div>
 
-              <div className="mt-4 text-sm text-slate-600">{t.text}</div>
+              <div className="mt-4 text-sm text-muted-foreground">{t.text}</div>
             </div>
           ))}
         </div>

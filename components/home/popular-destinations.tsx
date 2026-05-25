@@ -87,7 +87,6 @@ export function DestinosPopulares() {
                 <div className="text-sm text-white/85">{d.country}</div>
                 <div className="mt-4">
                   <Button
-                    className="bg-amber-500 text-slate-900 hover:bg-amber-400"
                     asChild
                   >
                     <Link href={`/?destino=${encodeURIComponent(d.city)}#pesquisa`}>
@@ -103,4 +102,3 @@ export function DestinosPopulares() {
     </section>
   );
 }
-
