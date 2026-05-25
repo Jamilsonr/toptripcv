@@ -1,6 +1,8 @@
 "use client";
 
 import { CalendarDays, MapPin, Users } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
@@ -97,25 +99,23 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
 
     router.push(`/chat?${params.toString()}`);
   };
-
-  const heroImageUrl = useMemo(() => {
-    const prompt = encodeURIComponent(
-      "ultra realistic modern travel destination photo, coastal city sunset view, warm lights, minimal composition, high-end editorial photography, sharp focus, 35mm, no text, no watermark",
-    );
-    return `https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${prompt}&image_size=landscape_16_9`;
-  }, []);
+  const invalidDestino = Boolean(error) && values.destino.trim().length === 0;
+  const invalidDataIda = Boolean(error) && values.dataIda.trim().length === 0;
+  const errorId = "toptrip-hero-error";
 
   return (
-    <section
-      id="pesquisa"
-      className="relative overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(90deg, rgba(15,23,42,0.88), rgba(30,64,175,0.78)), url(${heroImageUrl})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
+    <section id="pesquisa" className="relative overflow-hidden">
+      <Image
+        src="/images/banner.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/80 to-blue-900/70" />
+
+      <div className="relative mx-auto max-w-6xl px-4 py-16 md:py-24">
         <div className="max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">
             Viaja mais, gasta menos.
@@ -126,33 +126,52 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
           </p>
         </div>
 
-        <div className="mt-10 rounded-2xl bg-white/95 backdrop-blur border border-white/30 shadow-sm p-4 md:p-6">
+        <form
+          className="mt-10 rounded-2xl bg-white/95 backdrop-blur border border-white/30 shadow-sm p-4 md:p-6"
+          onSubmit={(e) => {
+            e.preventDefault();
+            submit();
+          }}
+          aria-describedby={error ? errorId : undefined}
+        >
           <div className="grid gap-3 md:grid-cols-6">
             <div className="md:col-span-2">
+              <label htmlFor="toptrip-origem" className="sr-only">
+                Origem
+              </label>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <MapPin size={18} />
                 </div>
                 <Input
+                  id="toptrip-origem"
                   value={values.origem}
                   onChange={(e) => setValues((v) => ({ ...v, origem: e.target.value }))}
                   placeholder="De onde partes?"
                   className="h-11 rounded-xl pl-10"
+                  autoComplete="off"
                 />
               </div>
             </div>
 
             <div className="md:col-span-2">
+              <label htmlFor="toptrip-destino" className="sr-only">
+                Destino
+              </label>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <MapPin size={18} />
                 </div>
                 <Input
+                  id="toptrip-destino"
                   value={values.destino}
                   onChange={(e) => setValues((v) => ({ ...v, destino: e.target.value }))}
                   placeholder="Para onde vais?"
                   list="toptrip-destinos"
                   className="h-11 rounded-xl pl-10"
+                  aria-invalid={invalidDestino}
+                  aria-describedby={error ? errorId : undefined}
+                  autoComplete="off"
                 />
                 <datalist id="toptrip-destinos">
                   {destinations.map((d) => (
@@ -163,25 +182,35 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
             </div>
 
             <div className="md:col-span-1">
+              <label htmlFor="toptrip-data-ida" className="sr-only">
+                Data de ida
+              </label>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <CalendarDays size={18} />
                 </div>
                 <Input
+                  id="toptrip-data-ida"
                   type="date"
                   value={values.dataIda}
                   onChange={(e) => setValues((v) => ({ ...v, dataIda: e.target.value }))}
                   className="h-11 rounded-xl pl-10"
+                  aria-invalid={invalidDataIda}
+                  aria-describedby={error ? errorId : undefined}
                 />
               </div>
             </div>
 
             <div className="md:col-span-1">
+              <label htmlFor="toptrip-data-volta" className="sr-only">
+                Data de volta
+              </label>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <CalendarDays size={18} />
                 </div>
                 <Input
+                  id="toptrip-data-volta"
                   type="date"
                   value={values.dataVolta}
                   onChange={(e) => setValues((v) => ({ ...v, dataVolta: e.target.value }))}
@@ -193,11 +222,15 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
 
           <div className="mt-3 grid gap-3 md:grid-cols-6">
             <div className="md:col-span-2">
+              <label htmlFor="toptrip-passageiros" className="sr-only">
+                Passageiros
+              </label>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
                   <Users size={18} />
                 </div>
                 <select
+                  id="toptrip-passageiros"
                   value={values.passageiros}
                   onChange={(e) =>
                     setValues((v) => ({
@@ -221,17 +254,28 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
 
             <div className="md:col-span-4 flex items-stretch gap-3 md:justify-end">
               <Button
-                type="button"
-                onClick={submit}
+                type="submit"
                 className="h-11 w-full md:w-auto bg-amber-500 text-slate-900 hover:bg-amber-400"
               >
                 Pesquisar
               </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="h-11 w-full md:w-auto border-white/40 bg-white/90 hover:bg-white"
+                asChild
+              >
+                <Link href="#como-funciona">Ver como funciona</Link>
+              </Button>
             </div>
           </div>
 
-          {error ? <div className="mt-3 text-sm text-red-600">{error}</div> : null}
-        </div>
+          {error ? (
+            <div id={errorId} role="alert" className="mt-3 text-sm text-red-600">
+              {error}
+            </div>
+          ) : null}
+        </form>
       </div>
     </section>
   );
