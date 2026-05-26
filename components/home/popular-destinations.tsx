@@ -63,7 +63,9 @@ export function DestinosPopulares() {
               <div
                 className="h-44 w-full bg-cover bg-center"
                 style={{
-                  backgroundImage: `url(${d.image ?? imageUrl(d.prompt)})`,
+                  backgroundImage: d.image
+                    ? `url(${d.image}), url(${imageUrl(d.prompt)})`
+                    : `url(${imageUrl(d.prompt)})`,
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/15 to-transparent" />
