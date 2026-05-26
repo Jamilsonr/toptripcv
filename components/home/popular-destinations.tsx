@@ -6,44 +6,30 @@ type Destination = {
   city: string;
   country: string;
   prompt: string;
+  image?: string;
 };
 
 const destinations: Array<Destination> = [
   {
     city: "Lisboa",
     country: "Portugal",
+    image: "/images/landing/lisboa.jpg",
     prompt:
       "ultra realistic travel photo of Lisbon Portugal, viewpoint over red rooftops and river, golden hour, high-end editorial, sharp focus, no text, no watermark",
   },
   {
     city: "Paris",
     country: "França",
+    image: "/images/landing/paris.jpg",
     prompt:
       "ultra realistic travel photo of Paris France, Eiffel tower in distance, soft morning light, minimal composition, high-end editorial, no text, no watermark",
   },
   {
-    city: "Nova Iorque",
-    country: "EUA",
+    city: "Tóquio",
+    country: "Japão",
+    image: "/images/landing/tokyo.jpg",
     prompt:
-      "ultra realistic travel photo of New York City skyline, modern minimal composition, sunset light, high-end editorial, no text, no watermark",
-  },
-  {
-    city: "Bangkok",
-    country: "Tailândia",
-    prompt:
-      "ultra realistic travel photo of Bangkok Thailand, river and temples at dusk, city lights, high-end editorial photography, no text, no watermark",
-  },
-  {
-    city: "Dubai",
-    country: "Emirados Árabes",
-    prompt:
-      "ultra realistic travel photo of Dubai UAE skyline, modern architecture, blue hour, minimal composition, high-end editorial, no text, no watermark",
-  },
-  {
-    city: "Barcelona",
-    country: "Espanha",
-    prompt:
-      "ultra realistic travel photo of Barcelona Spain, colorful architecture and seaside vibe, sunny day, high-end editorial, no text, no watermark",
+      "ultra realistic travel photo of Tokyo Japan, city skyline at night, neon lights, high-end editorial, no text, no watermark",
   },
 ];
 
@@ -55,14 +41,14 @@ function imageUrl(prompt: string) {
 
 export function DestinosPopulares() {
   return (
-    <section id="destinos" className="bg-slate-50">
+    <section id="destinos" className="bg-muted/40">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
         <div className="flex items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
               Destinos em destaque
             </h2>
-            <p className="mt-3 text-slate-600">
+            <p className="mt-3 text-muted-foreground">
               Inspira-te e começa a planear a tua próxima viagem.
             </p>
           </div>
@@ -72,15 +58,15 @@ export function DestinosPopulares() {
           {destinations.map((d) => (
             <div
               key={d.city}
-              className="group relative overflow-hidden rounded-2xl border bg-white shadow-sm"
+              className="group relative overflow-hidden rounded-2xl border bg-background shadow-sm"
             >
               <div
                 className="h-44 w-full bg-cover bg-center"
                 style={{
-                  backgroundImage: `url(${imageUrl(d.prompt)})`,
+                  backgroundImage: `url(${d.image ?? imageUrl(d.prompt)})`,
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/5 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/15 to-transparent" />
 
               <div className="absolute inset-x-0 bottom-0 p-5">
                 <div className="text-lg font-semibold text-white">{d.city}</div>

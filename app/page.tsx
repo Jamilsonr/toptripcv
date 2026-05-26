@@ -2,6 +2,7 @@ import { auth } from "@/app/(auth)/auth";
 import { Footer } from "@/components/home/footer";
 import { Hero } from "@/components/home/hero";
 import { ComoFunciona } from "@/components/home/how-it-works";
+import { Inspiracao } from "@/components/home/inspiration-gallery";
 import { Navbar } from "@/components/home/navbar";
 import { Ofertas } from "@/components/home/offers";
 import { DestinosPopulares } from "@/components/home/popular-destinations";
@@ -16,6 +17,7 @@ export default async function Page() {
       <Hero isAuthenticated={Boolean(session?.user)} />
       <ComoFunciona />
       <DestinosPopulares />
+      <Inspiracao />
       <Ofertas />
       <Testemunhos />
       <Footer />
